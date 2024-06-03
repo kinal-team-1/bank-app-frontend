@@ -7,7 +7,7 @@
     "preinstall": "node -e \"const fs = require('fs'); if (fs.existsSync('.git')) { require('child_process').execSync('git config core.hooksPath git-hooks'); }\"",
     "dev": "run-p vite:dev typesafe-i18n",
     "vite:dev": "vite",
-    "build": "vite build",
+    "build": "typesafe-i18n --no-watch && vite build",
     "start": "serve -s dist",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
