@@ -1,13 +1,16 @@
-import { useState, createContext, useContext, useEffect } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 // eslint-disable-next-line import/no-unresolved
 import { localStorageDetector } from "typesafe-i18n/detectors";
-import { i18nObject, detectLocale } from "../i18n/i18n-util";
-// import { loadLocale } from "../i18n/i18n-util.sync";
+import { detectLocale, i18nObject } from "../../i18n/i18n-util";
+// import { loadLocale } from "../../i18n/i18n-util.sync";
+import { loadLocaleAsync } from "../../i18n/i18n-util.async";
 
-import { loadLocaleAsync } from "../i18n/i18n-util.async";
-
-const LocaleContext = createContext();
+const LocaleContext = createContext({
+  locale: "en",
+  setLocale: () => {},
+  LL: null,
+});
 
 const detectedLocale = detectLocale(localStorageDetector);
 
@@ -44,13 +47,13 @@ LocaleProvider.propTypes = {
 };
 
 /**
- * @typedef { import('../i18n/i18n-types').TranslationFunctions } TranslationFunctions
+ * @typedef { import('../../i18n/i18n-types').TranslationFunctions } TranslationFunctions
  *
  */
 
 /**
  * Hook to access the locale context.
- * @returns {{LL: TranslationFunctions?, locale: string, setLocale: any}}
+ * @returns {{LL?: TranslationFunctions, locale: string, setLocale: any}}
  */
 export const useLocale = () => {
   return useContext(LocaleContext);

@@ -10,11 +10,12 @@
  * @param { Locales } locale
  * @return { Formatters }
  */
+// eslint-disable-next-line no-unused-vars
 export const initFormatters = (locale) => {
-	/** @type { Formatters } */
-	const formatters = {
-		// add your formatter functions here
-	}
+  /** @type { Formatters } */
+  const formatters = {
+    // add your formatter functions here
+  };
 
-	return formatters
-}
+  return formatters;
+};
