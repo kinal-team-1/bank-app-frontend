@@ -1,9 +1,10 @@
 import { Outlet } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import TypesafeI18n from "../i18n/i18n-react";
-import { useLocale } from "./services/locale";
+import { useLocaleService } from "./services/locale";
 
 export function App() {
-  const { locale } = useLocale();
+  const { locale } = useLocaleService();
 
   return (
     <TypesafeI18n
@@ -11,6 +12,7 @@ export function App() {
       locale={locale}
     >
       <Outlet />
+      <ToastContainer />
     </TypesafeI18n>
   );
 }
