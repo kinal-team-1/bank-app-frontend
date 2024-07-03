@@ -1,42 +1,70 @@
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
-import { API_URL } from "../../config";
-import "react-toastify/dist/ReactToastify.css";
+import { useEffect, useRef } from "react";
+import { getServices } from "../actions/GET/get-services";
+import { BankToast } from "../components/BankToast";
+import { useLocaleService } from "../../services/locale";
+import { useDarkModeService } from "../../services/dark-mode";
 
 export function Movements() {
+  const toastId = useRef(null);
+  const { locale } = useLocaleService();
+  const { isDark } = useDarkModeService();
+
   const {
-    data: {
-      data: transactions,
-      message,
-      errors,
-      isControlledError,
-      status,
-    } = {},
+    data: [services, message] = [],
+    error,
     isLoading,
-  } = useQuery({
-    queryKey: ["services"],
-    queryFn: async () => {
-      const response = await fetch(`${API_URL}/service?limit=-1`);
-      const value = await response.json();
-      console.log(value);
+  } = /** @type {import("@tanstack/react-query").UseQueryResult<any, import("../../types").CustomError>} */ (
+    useQuery({
+      queryKey: ["services", { locale }],
+      queryFn: getServices,
+    })
+  );
 
-      if (!response.ok && response.status < 500) {
-        return { ...value, isControlledError: true, status: response.status };
-      }
+  useEffect(() => {
+    if (!isLoading && toastId.current) {
+      toastId.current = null;
+    }
+  }, [isLoading]);
 
-      return value;
-    },
-  });
+  if (isLoading && !toastId.current) {
+    toastId.current = toast.loading("Loading...", {
+      theme: isDark ? "dark" : "light",
+    });
+  }
 
   if (isLoading) return <div>Loading...</div>;
 
-  if (isControlledError) {
-    if (status === 400) {
-      toast(errors.join("\n"), { type: "error", toastId: "service-error" });
-    }
-
-    return null;
+  if (error) {
+    toast.update(toastId.current, {
+      render: (
+        <BankToast
+          title={error.message}
+          statusCode={error.statusCode}
+          message={error.errors}
+        />
+      ),
+      type: "error",
+      isLoading: false,
+      autoClose: 5000,
+      closeButton: true,
+      theme: isDark ? "dark" : "light",
+    });
+    return (
+      <div className="flex justify-center text-4xl items-center w-full h-full">
+        Ups! algo mal ha sucedido
+      </div>
+    );
   }
+
+  toast.update(toastId.current, {
+    render: <BankToast title="Success" statusCode={200} message={[message]} />,
+    type: "success",
+    isLoading: false,
+    autoClose: 5000,
+    theme: isDark ? "dark" : "light",
+  });
 
   return (
     <div>

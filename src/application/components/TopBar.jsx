@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 import { useDarkModeService } from "../../services/dark-mode";
@@ -20,6 +20,7 @@ export function TobBar() {
 }
 
 function TopBarButtons() {
+  const { locale } = useParams();
   const { isDark, setIsDark } = useDarkModeService();
   const navigate = useNavigate();
   const currentPath = window.location.pathname;
@@ -41,7 +42,7 @@ function TopBarButtons() {
           const regex = new RegExp(`/(${options.join("|")})/`, "g");
           navigate(currentPath.replace(regex, `/${lang}/`));
         }}
-        defaultOption="en"
+        defaultOption={locale}
         options={["en", "es"]}
       />
       <button

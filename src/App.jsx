@@ -12,7 +12,7 @@ export function App() {
       locale={locale}
     >
       <Outlet />
-      <ToastContainer />
+      <ToastContainer position="bottom-right" />
     </TypesafeI18n>
   );
 }

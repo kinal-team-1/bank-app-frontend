@@ -8,7 +8,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { useDarkModeService } from "../../services/dark-mode";
-import { useLocaleService } from "../../services/locale.jsx";
+import { useLocaleService } from "../../services/locale";
 
 export function Navbar() {
   const { isDark } = useDarkModeService();
