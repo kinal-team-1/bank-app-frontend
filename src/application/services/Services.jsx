@@ -5,23 +5,29 @@ import { useLocaleService } from "../../services/locale";
 import { useDarkModeService } from "../../services/dark-mode";
 import { getServices } from "../actions/GET/get-services";
 import { BankToast } from "../components/BankToast";
+import { ErrorContainer } from "../components/ErrorContainer";
+
+/**
+ * @typedef {import("@tanstack/react-query").UseQueryResult<any, import("../../types").CustomError>} UseQueryResult
+ */
 
 export function Services() {
   const toastId = useRef(null);
-  const { locale } = useLocaleService();
+  const { locale, LL } = useLocaleService();
   const { isDark } = useDarkModeService();
 
   const {
-    data: [services, message] = [],
+    data: [services, message, status] = [],
     error,
     isLoading,
-  } = /** @type {import("@tanstack/react-query").UseQueryResult<any, import("../../types").CustomError>} */ (
+  } = /** @type UseQueryResult */ (
     useQuery({
       queryKey: ["services", { locale }],
       queryFn: getServices,
     })
   );
 
+  console.log(error);
   useEffect(() => {
     if (!isLoading && toastId.current) {
       toastId.current = null;
@@ -51,24 +57,35 @@ export function Services() {
       closeButton: true,
       theme: isDark ? "dark" : "light",
     });
-    return (
-      <div className="flex justify-center text-4xl items-center w-full h-full">
-        Ups! algo mal ha sucedido
-      </div>
-    );
+    return <ErrorContainer />;
   }
 
   toast.update(toastId.current, {
-    render: <BankToast title="Success" statusCode={200} message={[message]} />,
+    render: (
+      <BankToast
+        title={LL.TOAST.SUCCESS()}
+        statusCode={status}
+        message={[message]}
+      />
+    ),
     type: "success",
     isLoading: false,
     autoClose: 5000,
     theme: isDark ? "dark" : "light",
   });
 
+  if (!services) return null;
+
+  if (services.length === 0) {
+    return <div>No services found</div>;
+  }
+
   return (
     <div>
-      <h1>Movements</h1>
+      {services.map((service) => (
+        // here are gonna be the cards rendered
+        <div>Hey</div>
+      ))}
     </div>
   );
 }

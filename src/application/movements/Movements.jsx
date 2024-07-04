@@ -42,9 +42,6 @@ export function Movements() {
 }
 
 const Item = searchable(({ HighlightText, id, date, description, amount }) => {
-  // console.log(HighlightText);
-  console.log(id);
-
   return (
     <div key={id} className="flex justify-between">
       <div>

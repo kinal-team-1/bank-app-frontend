@@ -18,13 +18,7 @@ const colors = {
 /**
  * @param {BankToastProps} props
  */
-export function BankToast({
-  toastProps,
-  closeToast,
-  statusCode,
-  title,
-  message,
-}) {
+export function BankToast({ toastProps, statusCode, title, message }) {
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpenState = () => {
     setIsOpen((prev) => !prev);
@@ -38,15 +32,16 @@ export function BankToast({
         className={`flex justify-between items-center gap-2 font-bold ${colors[type]} w-full`}
       >
         <h1 className="text-xl line-clamp-1">{title}</h1>
-        <div className="text-3xl w-[3ch] shrink-0">{statusCode}</div>
+        {statusCode ? (
+          <div className="text-3xl w-[3ch] shrink-0">{statusCode}</div>
+        ) : null}
       </div>
       <div className={`flex flex-col ${colors[type]}`}>
         {!isOpen && (
           <>
-            {message.slice(0, 2).map((msg) => (
-              <span>{msg}</span>
-            ))}
-            {message.length > 2 && (
+            {message &&
+              message.slice(0, 2).map((msg) => <span key={msg}>{msg}</span>)}
+            {message && message.length > 2 && (
               <button type="button" onClick={toggleOpenState}>
                 Show more
               </button>
@@ -55,9 +50,7 @@ export function BankToast({
         )}
         {isOpen && (
           <>
-            {message.map((msg) => (
-              <span>{msg}</span>
-            ))}
+            {message && message.map((msg) => <span key={msg}>{msg}</span>)}
             <button type="button" onClick={toggleOpenState}>
               Show less
             </button>
@@ -71,5 +64,5 @@ export function BankToast({
 BankToast.propTypes = {
   statusCode: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-  message: PropTypes.string.isRequired,
+  message: PropTypes.arrayOf(PropTypes.string).isRequired,
 };

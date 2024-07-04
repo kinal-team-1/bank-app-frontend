@@ -15,6 +15,13 @@ const en = {
     MOVEMENTS: "Movements",
     CURRENCIES: "Currencies",
   },
+  ERROR: {
+    SOMETHING_WENT_WRONG: "Something went wrong",
+    PLEASE_TRY_AGAIN_LATER: "Please try again later",
+  },
+  TOAST: {
+    SUCCESS: "Success",
+  },
 };
 
 // eslint-disable-next-line import/no-default-export

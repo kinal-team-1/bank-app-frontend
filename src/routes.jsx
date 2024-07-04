@@ -7,7 +7,8 @@ import { Home } from "./application/home/Home";
 import { DarkModeProvider } from "./services/dark-mode";
 import { SearchProvider } from "./services/search-bar";
 import { Movements } from "./application/movements/Movements";
-import { Services } from "./application/services/Services.jsx";
+import { Services } from "./application/services/Services";
+import { NavbarMobileProvider } from "./services/navbar-mobile-service";
 
 const queryClient = new QueryClient();
 
@@ -19,7 +20,9 @@ const router = createBrowserRouter([
         <LocaleProvider>
           <DarkModeProvider>
             <SearchProvider>
-              <App />
+              <NavbarMobileProvider>
+                <App />
+              </NavbarMobileProvider>
             </SearchProvider>
           </DarkModeProvider>
         </LocaleProvider>

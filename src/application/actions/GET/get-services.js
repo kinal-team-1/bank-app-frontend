@@ -19,12 +19,21 @@ export class ServerError extends Error {
   }
 }
 
+export class FetchError extends Error {
+  constructor(message) {
+    super(message);
+    this.statusCode = 0;
+    this.errors = [];
+    this.name = "FetchError";
+  }
+}
+
 /**
  *
  * @param queryKey
  * @param signal
  * @returns {Promise<any>}
- * @throws {ClientError | ServerError}
+ * @throws {ClientError | ServerError | FetchError}
  */
 export function getServices({ queryKey, signal }) {
   const [_, { locale }] = queryKey;
@@ -36,8 +45,12 @@ export function getServices({ queryKey, signal }) {
         "Accept-Language": locale,
       },
     })
-    .then((res) => [res.data.data, res.data.message])
+    .then((res) => [res.data.data, res.data.message, res.status])
     .catch((error) => {
+      if (error.code === "ERR_NETWORK") {
+        throw new FetchError(error.message);
+      }
+
       if (error.response.status < 500) {
         throw new ClientError(
           error.response.data.message,
