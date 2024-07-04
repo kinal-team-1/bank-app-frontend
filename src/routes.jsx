@@ -7,6 +7,7 @@ import { Home } from "./application/home/Home";
 import { DarkModeProvider } from "./services/dark-mode";
 import { SearchProvider } from "./services/search-bar";
 import { Movements } from "./application/movements/Movements";
+import { Services } from "./application/services/Services.jsx";
 
 const queryClient = new QueryClient();
 
@@ -35,7 +36,7 @@ const router = createBrowserRouter([
           },
           {
             path: "services",
-            element: <div>Hola</div>,
+            element: <Services />,
           },
           {
             path: "movements",

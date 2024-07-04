@@ -5,7 +5,8 @@
         "checkJs": true,
         "module": "ESNext",
         "moduleResolution": "Bundler",
-        // dont know why but this fixes some errors
+        "lib": ["ESNext", "DOM"],
+        "target": "ESNext",
     },
     "include": ["./src/**/*",],
     "exclude": ["./i18n/**/*", "node_modules", "eslint-custom-rules"]
