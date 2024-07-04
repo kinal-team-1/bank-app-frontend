@@ -1,78 +1,26 @@
-import { useEffect, useRef } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { toast } from "react-toastify";
-import { useLocaleService } from "../../services/locale";
-import { useDarkModeService } from "../../services/dark-mode";
+import { useParams } from "react-router-dom";
 import { getServices } from "../actions/GET/get-services";
-import { BankToast } from "../components/BankToast";
 import { ErrorContainer } from "../components/ErrorContainer";
+import { useFetchWithToast } from "../hooks/use-fetch-with-toast";
 
 /**
  * @typedef {import("@tanstack/react-query").UseQueryResult<any, import("../../types").CustomError>} UseQueryResult
  */
 
 export function Services() {
-  const toastId = useRef(null);
-  const { locale, LL } = useLocaleService();
-  const { isDark } = useDarkModeService();
-
+  const { locale } = useParams();
   const {
-    data: [services, message, status] = [],
-    error,
+    data: [services] = [],
     isLoading,
-  } = /** @type UseQueryResult */ (
-    useQuery({
-      queryKey: ["services", { locale }],
-      queryFn: getServices,
-    })
-  );
-
-  console.log(error);
-  useEffect(() => {
-    if (!isLoading && toastId.current) {
-      toastId.current = null;
-    }
-  }, [isLoading]);
-
-  if (isLoading && !toastId.current) {
-    toastId.current = toast.loading("Loading...", {
-      theme: isDark ? "dark" : "light",
-    });
-  }
+    error,
+  } = useFetchWithToast({
+    queryKey: ["services", { locale }],
+    queryFn: getServices,
+  });
 
   if (isLoading) return <div>Loading...</div>;
 
-  if (error) {
-    toast.update(toastId.current, {
-      render: (
-        <BankToast
-          title={error.message}
-          statusCode={error.statusCode}
-          message={error.errors}
-        />
-      ),
-      type: "error",
-      isLoading: false,
-      autoClose: 5000,
-      closeButton: true,
-      theme: isDark ? "dark" : "light",
-    });
-    return <ErrorContainer />;
-  }
-
-  toast.update(toastId.current, {
-    render: (
-      <BankToast
-        title={LL.TOAST.SUCCESS()}
-        statusCode={status}
-        message={[message]}
-      />
-    ),
-    type: "success",
-    isLoading: false,
-    autoClose: 5000,
-    theme: isDark ? "dark" : "light",
-  });
+  if (error) return <ErrorContainer />;
 
   if (!services) return null;
 
@@ -82,7 +30,7 @@ export function Services() {
 
   return (
     <div>
-      {services.map((service) => (
+      {services.map(() => (
         // here are gonna be the cards rendered
         <div>Hey</div>
       ))}
