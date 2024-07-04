@@ -8,7 +8,7 @@ export function Searchbar() {
   return (
     <div className="w-[30ch] border rounded px-2 py-1 h-full flex gap-2 items-center">
       <input
-        onChange={(e) => setCurrentSearch(e.target.value)}
+        onChange={(e) => setCurrentSearch(e.target.value.trim())}
         type="text"
         placeholder="Search..."
         className="w-full h-full bg-[inherit] outline-none"

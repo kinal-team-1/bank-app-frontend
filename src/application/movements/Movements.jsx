@@ -1,74 +1,61 @@
-import { useQuery } from "@tanstack/react-query";
-import { toast } from "react-toastify";
-import { useEffect, useRef } from "react";
-import { getServices } from "../actions/GET/get-services";
-import { BankToast } from "../components/BankToast";
-import { useLocaleService } from "../../services/locale";
-import { useDarkModeService } from "../../services/dark-mode";
+import { searchable } from "../components/Searchable";
 
 export function Movements() {
-  const toastId = useRef(null);
-  const { locale } = useLocaleService();
-  const { isDark } = useDarkModeService();
-
-  const {
-    data: [services, message] = [],
-    error,
-    isLoading,
-  } = /** @type {import("@tanstack/react-query").UseQueryResult<any, import("../../types").CustomError>} */ (
-    useQuery({
-      queryKey: ["services", { locale }],
-      queryFn: getServices,
-    })
-  );
-
-  useEffect(() => {
-    if (!isLoading && toastId.current) {
-      toastId.current = null;
-    }
-  }, [isLoading]);
-
-  if (isLoading && !toastId.current) {
-    toastId.current = toast.loading("Loading...", {
-      theme: isDark ? "dark" : "light",
-    });
-  }
-
-  if (isLoading) return <div>Loading...</div>;
-
-  if (error) {
-    toast.update(toastId.current, {
-      render: (
-        <BankToast
-          title={error.message}
-          statusCode={error.statusCode}
-          message={error.errors}
-        />
-      ),
-      type: "error",
-      isLoading: false,
-      autoClose: 5000,
-      closeButton: true,
-      theme: isDark ? "dark" : "light",
-    });
-    return (
-      <div className="flex justify-center text-4xl items-center w-full h-full">
-        Ups! algo mal ha sucedido
-      </div>
-    );
-  }
-
-  toast.update(toastId.current, {
-    render: <BankToast title="Success" statusCode={200} message={[message]} />,
-    type: "success",
-    isLoading: false,
-    autoClose: 5000,
-    theme: isDark ? "dark" : "light",
-  });
-
+  const movements = [
+    {
+      id: 1,
+      amount: 100,
+      date: "2021-10-01",
+      description: "Salary",
+    },
+    {
+      id: 2,
+      amount: -50,
+      date: "2021-10-02",
+      description: "Rent",
+    },
+    {
+      id: 3,
+      amount: -10,
+      date: "2021-10-03",
+      description: "Food",
+    },
+    {
+      id: 4,
+      amount: 200,
+      date: "2021-10-04",
+      description: "Freelance",
+    },
+  ];
   return (
-    <div>
-      <h1>Movements</h1>
-    </div>
+    <>
+      {movements.map((movement) => (
+        <Item
+          id={movement.id}
+          date={movement.date}
+          description={movement.description}
+          amount={movement.amount}
+        />
+      ))}
+    </>
   );
 }
+
+const Item = searchable(({ HighlightText, id, date, description, amount }) => {
+  // console.log(HighlightText);
+  console.log(id);
+
+  return (
+    <div key={id} className="flex justify-between">
+      <div>
+        <HighlightText>{date}</HighlightText>
+      </div>
+      <div>
+        <HighlightText>{description}</HighlightText>
+      </div>
+      <div>
+        <HighlightText>{amount}</HighlightText>
+      </div>
+    </div>
+  );
+});
