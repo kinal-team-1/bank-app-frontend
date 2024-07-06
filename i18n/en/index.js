@@ -12,6 +12,7 @@ const en = {
   NAVBAR: {
     HOME: "Home",
     SERVICES: "Services",
+    PRODUCT: "Products",
     MOVEMENTS: "Movements",
     CURRENCIES: "Currencies",
     LOG_OUT: "Log out",
@@ -25,6 +26,11 @@ const en = {
   },
   PAGES: {
     SERVICE: {
+      NAME: "Name",
+      DESCRIPTION: "Description",
+      PRICE: "Price",
+    },
+    PRODUCT: {
       NAME: "Name",
       DESCRIPTION: "Description",
       PRICE: "Price",
