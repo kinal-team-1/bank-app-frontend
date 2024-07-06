@@ -1,6 +1,8 @@
-import { searchable } from "../components/Searchable";
+import { useState } from "react";
+import { searchable } from "../../components/Searchable";
 
 export function Movements() {
+  const [hiddenELements, setHiddenElements] = useState([]);
   const movements = [
     {
       id: 1,
@@ -31,20 +33,22 @@ export function Movements() {
     <>
       {movements.map((movement) => (
         <Item
+          onShow={() =>
+            setHiddenElements(hiddenELements.filter((el) => el !== movement.id))
+          }
+          onHide={() => setHiddenElements([...hiddenELements, movement.id])}
           id={movement.id}
           date={movement.date}
           description={movement.description}
           amount={movement.amount}
         />
       ))}
+      {hiddenELements.length === movements.length && <div>not FOund</div>}
     </>
   );
 }
 
 const Item = searchable(({ HighlightText, id, date, description, amount }) => {
-  // console.log(HighlightText);
-  console.log(id);
-
   return (
     <div key={id} className="flex justify-between">
       <div>

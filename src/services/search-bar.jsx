@@ -1,5 +1,6 @@
 import { createContext, useContext, useMemo, useState } from "react";
 import PropTypes from "prop-types";
+import { useLocation } from "react-router-dom";
 
 /**
  * @typedef {Object} SearchContextType
@@ -8,7 +9,7 @@ import PropTypes from "prop-types";
  */
 
 /**
- * @type {React.Context<{currentSearch: string, setCurrentSearch: *}>}
+ * @type {React.Context<SearchContextType>}
  */
 const searchContext = createContext({
   currentSearch: "",
@@ -17,6 +18,7 @@ const searchContext = createContext({
 
 export function SearchProvider({ children }) {
   const [currentSearch, setCurrentSearch] = useState("");
+  const { pathname } = useLocation();
 
   const value = useMemo(
     () => ({ currentSearch, setCurrentSearch }),

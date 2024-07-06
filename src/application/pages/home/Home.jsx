@@ -1,4 +1,4 @@
-import { useLocaleService } from "../../services/locale";
+import { useLocaleService } from "../../../services/locale.jsx";
 
 export function Home() {
   const { LL } = useLocaleService();
