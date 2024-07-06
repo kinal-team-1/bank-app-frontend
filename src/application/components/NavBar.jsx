@@ -38,6 +38,11 @@ export function Navbar() {
       icon: faMoneyBillWave,
       link: `/${locale}/currencies`,
     },
+    {
+      name: LL?.NAVBAR?.USER(),
+      icon: faMoneyBillWave,
+      link: `/${locale}/users`,
+    },
   ];
 
   return (

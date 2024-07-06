@@ -15,6 +15,7 @@ const en = {
     MOVEMENTS: "Movements",
     CURRENCIES: "Currencies",
     LOG_OUT: "Log out",
+    USER: "users",
   },
   ERROR: {
     SOMETHING_WENT_WRONG: "Something went wrong",
@@ -29,7 +30,13 @@ const en = {
       DESCRIPTION: "Description",
       PRICE: "Price",
     },
+    USER: {
+      EMAIL: "Email",
+      DESCRIPTION: "Description",
+      PRICE: "Price",
+    },
   },
+  
 };
 
 // eslint-disable-next-line import/no-default-export

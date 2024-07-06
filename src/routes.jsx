@@ -11,6 +11,7 @@ import { Services } from "./application/pages/services/Services";
 import { NavbarMobileProvider } from "./services/navbar-mobile-service";
 import { NotFound } from "./application/pages/NotFound";
 import { RedirectToHome } from "./application/pages/RedirectToHome";
+import { User } from "./application/pages/user/User";
 
 const queryClient = new QueryClient();
 
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
           {
             path: "currencies",
             element: <div>Hola</div>,
+          },
+          {
+            path: "user",
+            element: <User />,
           },
           // MUST BE LAST ALWAYS
           { path: "*", element: <NotFound /> },
