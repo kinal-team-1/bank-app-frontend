@@ -19,22 +19,22 @@ export function Navbar() {
 
   const routes = [
     {
-      name: LL?.BOTTOM_NAVBAR?.HOME(),
+      name: LL?.NAVBAR?.HOME(),
       icon: faHome,
       link: `/${locale}`,
     },
     {
-      name: LL?.BOTTOM_NAVBAR?.SERVICES(),
+      name: LL?.NAVBAR?.SERVICES(),
       icon: faFileInvoice,
       link: `/${locale}/services`,
     },
     {
-      name: LL?.BOTTOM_NAVBAR?.MOVEMENTS(),
+      name: LL?.NAVBAR?.MOVEMENTS(),
       icon: faRetweet,
       link: `/${locale}/movements`,
     },
     {
-      name: LL?.BOTTOM_NAVBAR?.CURRENCIES(),
+      name: LL?.NAVBAR?.CURRENCIES(),
       icon: faMoneyBillWave,
       link: `/${locale}/currencies`,
     },
@@ -80,7 +80,7 @@ export function Navbar() {
       {/* MIGHT CHANGE TO <Link /> */}
       <button type="button" className="flex gap-2 items-center">
         <FontAwesomeIcon icon={faArrowRightToBracket} />
-        <span>Log out</span>
+        <span>{LL?.NAVBAR?.LOG_OUT()}</span>
       </button>
     </div>
   );

@@ -66,7 +66,7 @@ export function useFetchWithToast({ queryKey, queryFn }, options = {}) {
       toast.update(toastId.current, {
         render: (
           <BankToast
-            title={LL.TOAST.SUCCESS()}
+            title={LL?.TOAST?.SUCCESS()}
             statusCode={status}
             message={[message]}
           />

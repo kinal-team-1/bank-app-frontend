@@ -9,11 +9,12 @@ const en = {
   // TODO: your translations go here
   HI: "Hi {name:string}!",
   TITLE: "Hello World!",
-  BOTTOM_NAVBAR: {
+  NAVBAR: {
     HOME: "Home",
     SERVICES: "Services",
     MOVEMENTS: "Movements",
     CURRENCIES: "Currencies",
+    LOG_OUT: "Log out",
   },
   ERROR: {
     SOMETHING_WENT_WRONG: "Something went wrong",
@@ -21,6 +22,13 @@ const en = {
   },
   TOAST: {
     SUCCESS: "Success",
+  },
+  PAGES: {
+    SERVICE: {
+      NAME: "Name",
+      DESCRIPTION: "Description",
+      PRICE: "Price",
+    },
   },
 };
 

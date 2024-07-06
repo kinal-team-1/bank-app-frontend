@@ -2,19 +2,35 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import { useSearchService } from "../../services/search-bar";
 
+/**
+ * @typedef {Object} SearchableProps
+ * @property {() => void} onHide
+ * @property {() => void} onShow
+ */
+
 export function searchable(WrappedComponent) {
-  return function SearchableComponent(props) {
+  /** @param {SearchableProps & any} props */
+  // eslint-disable-next-line react/prop-types
+  return function SearchableComponent({ onHide, onShow, ...props }) {
     const { currentSearch } = useSearchService();
     const searchableTextsRef = useRef(new Set([]));
     const [isVisible, setIsVisible] = useState(true);
 
     useEffect(() => {
-      const hasMatch = Array.from(searchableTextsRef.current).some((text) =>
-        text.toLowerCase().includes(currentSearch.toLowerCase()),
-      );
+      const hasMatch =
+        searchableTextsRef.current.size === 0 ||
+        Array.from(searchableTextsRef.current).some((text) =>
+          text.toLowerCase().includes(currentSearch.toLowerCase()),
+        );
 
       setIsVisible(hasMatch);
     }, [currentSearch]);
+
+    useEffect(() => {
+      if (!isVisible) {
+        onHide();
+      } else onShow();
+    }, [isVisible]);
 
     const HighlightTextWrapper = useCallback(
       ({ children }) => (

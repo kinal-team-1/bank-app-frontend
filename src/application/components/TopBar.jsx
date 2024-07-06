@@ -13,6 +13,7 @@ import { DropDown } from "./DropDown";
 import { Searchbar } from "./SearchBar";
 import { useSearchService } from "../../services/search-bar";
 import { useNavbarMobileService } from "../../services/navbar-mobile-service.jsx";
+import { SOPORTED_LANGUAGES } from "../../config.js";
 
 export function TobBar() {
   const [isSearchBarOpen, setIsSearchBarOpen] = useState(false);
@@ -97,7 +98,7 @@ function TopBarButtons() {
           navigate(currentPath.replace(regex, `/${lang}/`));
         }}
         defaultOption={locale}
-        options={["en", "es"]}
+        options={SOPORTED_LANGUAGES}
       />
       <button
         type="button"
