@@ -34,6 +34,7 @@ const es = {
       NAME: "Nombre",
       DESCRIPTION: "Descripción",
       PRICE: "Precio",
+      STOCK: "Existencias",
     },
   },
 };

@@ -36,11 +36,11 @@ export class FetchError extends Error {
  * @returns {Promise<any>}
  * @throws {ClientError | ServerError | FetchError}
  */
-export function getServices({ queryKey, signal }) {
+export function getProducts({ queryKey, signal }) {
   const [_, { locale, params }] = queryKey;
 
   return axios
-    .get(`${API_URL}/service?${params}`, {
+    .get(`${API_URL}/product?${params}`, {
       signal,
       headers: {
         "Accept-Language": locale,
