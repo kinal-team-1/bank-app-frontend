@@ -6,6 +6,7 @@ import {
   faHome,
   faMoneyBillWave,
   faRetweet,
+  faStar,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { useDarkModeService } from "../../services/dark-mode";
@@ -37,6 +38,11 @@ export function Navbar() {
       name: LL?.NAVBAR?.CURRENCIES(),
       icon: faMoneyBillWave,
       link: `/${locale}/currencies`,
+    },
+    {
+      name: LL?.NAVBAR?.FAVORITE_ACCOUNTS(),
+      icon: faStar,
+      link: `/${locale}/favorite-accounts`,
     },
   ];
 

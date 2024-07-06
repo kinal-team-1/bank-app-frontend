@@ -8,6 +8,7 @@ import { DarkModeProvider } from "./services/dark-mode";
 import { SearchProvider } from "./services/search-bar";
 import { Movements } from "./application/pages/movements/Movements";
 import { Services } from "./application/pages/services/Services";
+import { FavoriteAccounts } from "./application/pages/favoriteAccounts/FavoriteAccounts";
 import { NavbarMobileProvider } from "./services/navbar-mobile-service";
 import { NotFound } from "./application/pages/NotFound";
 import { RedirectToHome } from "./application/pages/RedirectToHome";
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
           {
             path: "currencies",
             element: <div>Hola</div>,
+          },
+          {
+            path: "favorite-accounts",
+            element: <FavoriteAccounts />,
           },
           // MUST BE LAST ALWAYS
           { path: "*", element: <NotFound /> },
