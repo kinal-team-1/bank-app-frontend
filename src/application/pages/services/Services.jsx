@@ -1,4 +1,4 @@
-import { useParams, useSearchParams } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import { useState } from "react";
 import { getServices } from "../../actions/GET/get-services";
 import { ErrorContainer } from "../../components/ErrorContainer";
@@ -27,7 +27,15 @@ export function Services() {
   console.log({ services }, { hiddenElements });
 
   return (
-    <div className="h-full flex flex-col">
+    <div className="h-full flex flex-col gap-2">
+      <div className="py-2 flex justify-end md:px-4">
+        <Link
+          to="./create"
+          className="px-4 py-2 bg-primary-400 rounded text-white hover:bg-primary-300"
+        >
+          Crear
+        </Link>
+      </div>
       <div className="grow content-start overflow-y-scroll gap-5 md:px-4 grid grid-cols-[repeat(auto-fill,minmax(330px,1fr))]">
         {services.map((service) => (
           <ServiceCard

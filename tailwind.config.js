@@ -50,6 +50,7 @@ export default {
       },
       red: defaultColors.red,
       green: defaultColors.green,
+      white: defaultColors.white,
     },
     extend: {},
   },

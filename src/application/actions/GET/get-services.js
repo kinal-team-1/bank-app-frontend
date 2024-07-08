@@ -1,3 +1,4 @@
+// eslint-disable-next-line max-classes-per-file
 import axios from "axios";
 import { API_URL } from "../../../config";
 
@@ -36,6 +37,7 @@ export class FetchError extends Error {
  * @throws {ClientError | ServerError | FetchError}
  */
 export function getServices({ queryKey, signal }) {
+  // eslint-disable-next-line no-unused-vars
   const [_, { locale, params }] = queryKey;
 
   return axios

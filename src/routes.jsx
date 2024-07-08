@@ -1,23 +1,32 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Outlet, redirect } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { App } from "./App";
-import { Layout } from "./Layout";
 import { LocaleProvider } from "./services/locale";
-import { Home } from "./application/pages/home/Home";
 import { DarkModeProvider } from "./services/dark-mode";
 import { SearchProvider } from "./services/search-bar";
-import { Movements } from "./application/pages/movements/Movements";
-import { Services } from "./application/pages/services/Services";
 import { NavbarMobileProvider } from "./services/navbar-mobile-service";
 import { NotFound } from "./application/pages/NotFound";
-import { RedirectToHome } from "./application/pages/RedirectToHome";
+import { Layout } from "./Layout";
+import { Home } from "./application/pages/home/Home";
+import { Services } from "./application/pages/services/Services";
+import { Movements } from "./application/pages/movements/Movements";
+import { SUPPORTED_LANGUAGES } from "./config";
+import { ServiceForm } from "./application/pages/services/ServiceForm.jsx";
 
 const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
+    loader: () => {
+      const locale = navigator.language.split("-").at(0) || "en";
+      console.log({ locale });
+      if (SUPPORTED_LANGUAGES.includes(locale)) {
+        return redirect(`/${locale}`);
+      }
+
+      return redirect("/en");
+    },
     path: "/",
-    element: <RedirectToHome />,
   },
   {
     path: "/:locale",
@@ -36,6 +45,16 @@ const router = createBrowserRouter([
     ),
     children: [
       {
+        loader: () => {
+          if (window.location.pathname === "/") return null;
+          const locale = window.location.pathname.split("/")[1];
+          console.log({ locale }, window.location.pathname);
+
+          if (!SUPPORTED_LANGUAGES.includes(locale)) {
+            return redirect("/not-found");
+          }
+          return null;
+        },
         path: "",
         element: <Layout />,
         children: [
@@ -45,7 +64,17 @@ const router = createBrowserRouter([
           },
           {
             path: "services",
-            element: <Services />,
+            element: <Outlet />,
+            children: [
+              {
+                path: "",
+                element: <Services />,
+              },
+              {
+                path: "create",
+                element: <ServiceForm />,
+              },
+            ],
           },
           {
             path: "movements",
@@ -61,9 +90,8 @@ const router = createBrowserRouter([
       },
     ],
   },
-  // MUST BE LAST ALWAYS
   {
-    path: "*",
+    path: "not-found",
     element: (
       <DarkModeProvider>
         <NotFound />
