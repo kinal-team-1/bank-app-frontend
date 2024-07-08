@@ -32,11 +32,10 @@ const en = {
     },
     USER: {
       EMAIL: "Email",
-      DESCRIPTION: "Description",
-      PRICE: "Price",
+      USERNAME: "Username",
+      NAME: "Name",
     },
   },
-  
 };
 
 // eslint-disable-next-line import/no-default-export

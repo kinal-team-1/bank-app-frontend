@@ -15,6 +15,7 @@ const es = {
     MOVEMENTS: "Movimientos",
     CURRENCIES: "Divisas",
     LOG_OUT: "Cerrar sesión",
+    USER: "Usuarios",
   },
   ERROR: {
     SOMETHING_WENT_WRONG: "Algo salió mal",
@@ -28,6 +29,11 @@ const es = {
       NAME: "Nombre",
       DESCRIPTION: "Descripción",
       PRICE: "Precio",
+    },
+    USER: {
+      EMAIL: "Correo",
+      USERNAME: "Nombre de usuario",
+      NAME: "Nombre",
     },
   },
 };

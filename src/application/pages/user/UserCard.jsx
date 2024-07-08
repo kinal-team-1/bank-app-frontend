@@ -3,7 +3,7 @@ import { useLocaleService } from "../../../services/locale";
 
 // HIGHER ORDER COMPONENT
 export const UserCard = searchable(
-  ({ HighlightText, email, username, name, currency }) => {
+  ({ HighlightText, email, username, name }) => {
     const { LL } = useLocaleService();
 
     return (
@@ -13,9 +13,7 @@ export const UserCard = searchable(
           <HighlightText>{email}</HighlightText>
         </h2>
         <p className="text-gray-500">
-          <h3 className="text-primary-400">
-            {LL?.PAGES?.USER?.USERNAME?.()}
-          </h3>
+          <h3 className="text-primary-400">{LL?.PAGES?.USER?.USERNAME?.()}</h3>
           <HighlightText>{username}</HighlightText>
         </p>
         <p className="text-gray-500">
