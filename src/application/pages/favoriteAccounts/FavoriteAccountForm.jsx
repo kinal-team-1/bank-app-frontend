@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
@@ -6,12 +6,13 @@ import { useQuery } from "@tanstack/react-query";
 import { useMutationWithToast } from "../../hooks/use-mutation-with-toast";
 import { postFavoriteAccount } from "../../actions/POST/post-favorite-account";
 import { useAuthService } from "../../../services/auth";
-import { getUserById } from "../../actions/GET/get-user-by-id.js";
+import { getUserById } from "../../actions/GET/get-user-by-id";
 import { UISelect } from "../../components/UI/Select";
 
 export function FavoriteAccountForm() {
   const { locale } = useParams();
-  const { user } = useAuthService();
+  const selectedAccount = useRef(null);
+  const { user: userLogged } = useAuthService();
   // const { LL } = useLocaleService();
   const [form, setForm] = useState({
     account: "",
@@ -24,7 +25,7 @@ export function FavoriteAccountForm() {
     isError,
   } = useQuery({
     // eslint-disable-next-line no-underscore-dangle
-    queryKey: ["user", { locale, id: user._id }],
+    queryKey: ["user", { locale, id: userLogged._id }],
     queryFn: getUserById,
   });
 
@@ -61,7 +62,11 @@ export function FavoriteAccountForm() {
             e.preventDefault();
             // prevent multiple submits
             if (!mutation.isIdle) return;
-            mutation.mutate({ favoriteAccount: form, locale, user });
+            mutation.mutate({
+              favoriteAccount: form,
+              locale,
+              user: userLogged,
+            });
           }}
         >
           <label className="col-span-full md:col-span-1 md:text-end text-silver-500 pt-2">
