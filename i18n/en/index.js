@@ -34,7 +34,15 @@ const en = {
     USER: {
       EMAIL: "Email",
       USERNAME: "Username",
+      PASSWORD: "password",
       NAME: "Name",
+      LAST_NAME: "Last Name",
+      ADDRESS: "Address",
+      DPI: "DPI",
+      PHONE_NUMBER: "Phone number",
+      JOB_NAME: "Job name",
+      MONTHLY_INCOME: "Monthly income",
+      CURRENCY_INCOME: "Currency income",
     },
     FAVORITE_ACCOUNT: {
       ACCOUNT: "Account",

@@ -20,6 +20,7 @@ import { validateToken } from "./application/actions/GET/validate-token";
 import { FavoriteAccountForm } from "./application/pages/favoriteAccounts/FavoriteAccountForm";
 import { PrivateUserRoute } from "./application/PrivateUserRoute";
 import { AuthProvider } from "./services/auth";
+import UserForm from "./application/pages/user/UserForm";
 
 const queryClient = new QueryClient();
 
@@ -127,7 +128,17 @@ const router = createBrowserRouter([
                   },
                   {
                     path: "user",
-                    element: <User />,
+                    element: <Outlet />,
+                    children: [
+                      {
+                        path: "",
+                        element: <User />,
+                      },
+                      {
+                        path: "create",
+                        element: <UserForm />,  
+                      },
+                    ],
                   },
                   // MUST BE LAST ALWAYS
                   { path: "*", element: <NotFound /> },

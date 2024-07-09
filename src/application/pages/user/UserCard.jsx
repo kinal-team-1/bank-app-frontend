@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { searchable } from "../../components/Searchable";
 import { useLocaleService } from "../../../services/locale";
 
@@ -24,6 +25,9 @@ export const UserCard = searchable(
             </span>
           </div>
         </p>
+        <button type="button" className="bg-primary-400 w-full rounded py-2">
+          Eliminar
+        </button>
       </div>
     );
   },

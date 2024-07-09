@@ -1,13 +1,13 @@
 import axios from "axios";
 import { API_URL } from "../../../config";
-import { ClientError, FetchError, ServerError } from "../GET/get-users";
+import { ClientError, FetchError, ServerError } from "../GET/get-services";
 
-export function postUser({ user, locale, user }) {
+export function postUser({ user, locale }) {
   return axios
     .post(
-      `${API_URL}/favorite-accounts`,
+      `${API_URL}/user`,
       // eslint-disable-next-line no-underscore-dangle
-      { ...user, owner: user._id },
+      user,
       {
         headers: {
           "Accept-Language": locale,

@@ -1,4 +1,4 @@
-import { useParams, useSearchParams } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import { useState } from "react";
 import { getUsers } from "../../actions/GET/get-users";
 import { ErrorContainer } from "../../components/ErrorContainer";
@@ -28,6 +28,14 @@ export function User() {
 
   return (
     <div className="h-full flex flex-col">
+      <div className="flex justify-end">
+        <Link
+          className="bg-primary-400 rounded py-2 px-4 text-white"
+          to="./create"
+        >
+          Crear
+        </Link>
+      </div>
       <div className="grow content-start overflow-y-scroll gap-5 md:px-4 grid grid-cols-[repeat(auto-fill,minmax(330px,1fr))]">
         {users.map((user) => (
           <UserCard
