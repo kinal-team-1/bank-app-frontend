@@ -11,81 +11,99 @@ import { Home } from "./application/pages/home/Home";
 import { Services } from "./application/pages/services/Services";
 import { Movements } from "./application/pages/movements/Movements";
 import { SUPPORTED_LANGUAGES } from "./config";
-import { ServiceForm } from "./application/pages/services/ServiceForm.jsx";
+import { ServiceForm } from "./application/pages/services/ServiceForm";
+import { Login } from "./application/pages/log-in/Login";
+import { AuthProvider } from "./services/auth";
+import { UserValidation } from "./UserValidaion";
+import { validateToken } from "./application/actions/GET/validate-token";
 
 const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
-    loader: () => {
-      const locale = navigator.language.split("-").at(0) || "en";
-      console.log({ locale });
-      if (SUPPORTED_LANGUAGES.includes(locale)) {
-        return redirect(`/${locale}`);
-      }
-
-      return redirect("/en");
-    },
-    path: "/",
-  },
-  {
-    path: "/:locale",
-    element: (
-      <QueryClientProvider client={queryClient}>
-        <LocaleProvider>
-          <DarkModeProvider>
-            <SearchProvider>
-              <NavbarMobileProvider>
-                <App />
-              </NavbarMobileProvider>
-            </SearchProvider>
-          </DarkModeProvider>
-        </LocaleProvider>
-      </QueryClientProvider>
-    ),
+    path: "",
+    element: <UserValidation />,
     children: [
       {
-        loader: () => {
-          if (window.location.pathname === "/") return null;
-          const locale = window.location.pathname.split("/")[1];
-          console.log({ locale }, window.location.pathname);
+        loader: async () => {
+          const navigatorLocale = navigator.language.split("-").at(0) || "en";
+          const isSupported = SUPPORTED_LANGUAGES.includes(navigatorLocale);
+          const locale = isSupported ? navigatorLocale : "en";
 
-          if (!SUPPORTED_LANGUAGES.includes(locale)) {
-            return redirect("/not-found");
-          }
-          return null;
+          const token = localStorage.getItem("token");
+          if (!token) return redirect(`${locale}/login`);
+          const user = await validateToken(token);
+          if (!user) return redirect(`${locale}/login`);
+
+          return redirect(`/${locale}`);
         },
-        path: "",
-        element: <Layout />,
+        path: "/",
+      },
+      {
+        path: "/:locale",
+        element: (
+          <QueryClientProvider client={queryClient}>
+            <AuthProvider>
+              <LocaleProvider>
+                <DarkModeProvider>
+                  <SearchProvider>
+                    <NavbarMobileProvider>
+                      <App />
+                    </NavbarMobileProvider>
+                  </SearchProvider>
+                </DarkModeProvider>
+              </LocaleProvider>
+            </AuthProvider>
+          </QueryClientProvider>
+        ),
         children: [
           {
-            path: "",
-            element: <Home />,
+            path: "login",
+            element: <Login />,
           },
           {
-            path: "services",
-            element: <Outlet />,
+            loader: () => {
+              if (window.location.pathname === "/") return null;
+              const locale = window.location.pathname.split("/")[1];
+
+              if (!SUPPORTED_LANGUAGES.includes(locale)) {
+                return redirect("/not-found");
+              }
+              return null;
+            },
+            path: "",
+            element: <Layout />,
             children: [
               {
                 path: "",
-                element: <Services />,
+                element: <Home />,
               },
               {
-                path: "create",
-                element: <ServiceForm />,
+                path: "services",
+                element: <Outlet />,
+                children: [
+                  {
+                    path: "",
+                    element: <Services />,
+                  },
+                  {
+                    path: "create",
+                    element: <ServiceForm />,
+                  },
+                ],
               },
+              {
+                path: "movements",
+                element: <Movements />,
+              },
+              {
+                path: "currencies",
+                element: <div>Hola</div>,
+              },
+              // MUST BE LAST ALWAYS
+              { path: "*", element: <NotFound /> },
             ],
           },
-          {
-            path: "movements",
-            element: <Movements />,
-          },
-          {
-            path: "currencies",
-            element: <div>Hola</div>,
-          },
-          // MUST BE LAST ALWAYS
-          { path: "*", element: <NotFound /> },
         ],
       },
     ],
