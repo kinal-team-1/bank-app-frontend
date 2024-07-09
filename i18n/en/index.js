@@ -36,6 +36,12 @@ const en = {
       ALIAS: "alias",
     },
   },
+  FORMS: {
+    FAVORITE_ACCOUNT: {
+      TITLE: "New Account",
+      OWNER: "owner",
+    },
+  },
 };
 
 // eslint-disable-next-line import/no-default-export

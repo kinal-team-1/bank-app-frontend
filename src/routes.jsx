@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Outlet } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { App } from "./App";
 import { Layout } from "./Layout";
@@ -12,6 +12,7 @@ import { FavoriteAccounts } from "./application/pages/favoriteAccounts/FavoriteA
 import { NavbarMobileProvider } from "./services/navbar-mobile-service";
 import { NotFound } from "./application/pages/NotFound";
 import { RedirectToHome } from "./application/pages/RedirectToHome";
+import { FavoriteAccountForm } from "./application/pages/favoriteAccounts/FavoriteAccountForm";
 
 const queryClient = new QueryClient();
 
@@ -58,7 +59,17 @@ const router = createBrowserRouter([
           },
           {
             path: "favorite-accounts",
-            element: <FavoriteAccounts />,
+            element: <Outlet />,
+            children: [
+              {
+                path: "",
+                element: <FavoriteAccounts />,
+              },
+              {
+                path: "create",
+                element: <FavoriteAccountForm />,
+              },
+            ],
           },
           // MUST BE LAST ALWAYS
           { path: "*", element: <NotFound /> },

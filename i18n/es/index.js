@@ -36,6 +36,12 @@ const es = {
       ALIAS: "Alias",
     },
   },
+  FORMS: {
+    FAVORITE_ACCOUNT: {
+      TITLE: "Crear Alias",
+      OWNER: "Propietario",
+    },
+  },
 };
 
 // eslint-disable-next-line import/no-default-export
