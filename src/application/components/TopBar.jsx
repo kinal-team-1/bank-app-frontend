@@ -12,8 +12,8 @@ import { useDarkModeService } from "../../services/dark-mode";
 import { DropDown } from "./DropDown";
 import { Searchbar } from "./SearchBar";
 import { useSearchService } from "../../services/search-bar";
-import { useNavbarMobileService } from "../../services/navbar-mobile-service.jsx";
-import { SUPPORTED_LANGUAGES } from "../../config.js";
+import { useNavbarMobileService } from "../../services/navbar-mobile-service";
+import { SUPPORTED_LANGUAGES } from "../../config";
 
 export function TobBar() {
   const [isSearchBarOpen, setIsSearchBarOpen] = useState(false);
@@ -22,7 +22,7 @@ export function TobBar() {
 
   return (
     <>
-      <div className="hidden md:grid py-5 px-3 grid-cols-3 justify-items-center items-center">
+      <div className="hidden md:grid py-5 px-3 grid-cols-3 justify-items-center items-center bg-primary-400">
         <h1 className="justify-self-start text-2xl">Overview</h1>
         <div className="justify-self-center h-full">
           <Searchbar />
