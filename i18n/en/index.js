@@ -16,6 +16,7 @@ const en = {
     CURRENCIES: "Currencies",
     LOG_OUT: "Log out",
     USER: "users",
+    FAVORITE_ACCOUNTS: "Favorite Accounts",
   },
   ERROR: {
     SOMETHING_WENT_WRONG: "Something went wrong",
@@ -34,6 +35,22 @@ const en = {
       EMAIL: "Email",
       USERNAME: "Username",
       NAME: "Name",
+    },
+    FAVORITE_ACCOUNT: {
+      ACCOUNT: "Account",
+      OWNER: "Owner",
+      ALIAS: "alias",
+    },
+  },
+  FORMS: {
+    FAVORITE_ACCOUNT: {
+      TITLE: "New Account",
+      OWNER: "owner",
+    },
+    SERVICE: {
+      VALIDATION: {
+        NAME_REQUIRED: "Name is required, and must be 3 characters long",
+      },
     },
   },
 };

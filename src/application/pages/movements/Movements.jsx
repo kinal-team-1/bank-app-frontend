@@ -1,51 +1,35 @@
-import { useState } from "react";
+import { useQueries } from "@tanstack/react-query";
+import { useParams, useSearchParams } from "react-router-dom";
 import { searchable } from "../../components/Searchable";
+import { getTransactions } from "../../actions/GET/get-transactions.js";
+import { getTransferences } from "../../actions/GET/get-transferences";
+import { getPayouts } from "../../actions/GET/get-payouts.js";
 
 export function Movements() {
-  const [hiddenELements, setHiddenElements] = useState([]);
-  const movements = [
-    {
-      id: 1,
-      amount: 100,
-      date: "2021-10-01",
-      description: "Salary",
-    },
-    {
-      id: 2,
-      amount: -50,
-      date: "2021-10-02",
-      description: "Rent",
-    },
-    {
-      id: 3,
-      amount: -10,
-      date: "2021-10-03",
-      description: "Food",
-    },
-    {
-      id: 4,
-      amount: 200,
-      date: "2021-10-04",
-      description: "Freelance",
-    },
-  ];
-  return (
-    <>
-      {movements.map((movement) => (
-        <Item
-          onShow={() =>
-            setHiddenElements(hiddenELements.filter((el) => el !== movement.id))
-          }
-          onHide={() => setHiddenElements([...hiddenELements, movement.id])}
-          id={movement.id}
-          date={movement.date}
-          description={movement.description}
-          amount={movement.amount}
-        />
-      ))}
-      {hiddenELements.length === movements.length && <div>not FOund</div>}
-    </>
-  );
+  // const [hiddenELements, setHiddenElements] = useState([]);
+  const { locale } = useParams();
+  const params = useSearchParams();
+  useQueries({
+    queries: [
+      {
+        queryKey: ["transactions", { locale, params }],
+        queryFn: getTransactions,
+      },
+      {
+        queryKey: ["transferences", { locale, params }],
+        queryFn: getTransferences,
+      },
+      {
+        queryKey: ["payouts", { locale, params }],
+        queryFn: getPayouts,
+      },
+      // {
+      //   queryKey: ["purchases", { locale, params }],
+      //   queryFn: getPurchases,
+      // },
+    ],
+  });
+  return <>hi</>;
 }
 
 const Item = searchable(({ HighlightText, id, date, description, amount }) => {

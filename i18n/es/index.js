@@ -16,6 +16,7 @@ const es = {
     CURRENCIES: "Divisas",
     LOG_OUT: "Cerrar sesión",
     USER: "Usuarios",
+    FAVORITE_ACCOUNTS: "Cuentas Favoritas",
   },
   ERROR: {
     SOMETHING_WENT_WRONG: "Algo salió mal",
@@ -34,6 +35,22 @@ const es = {
       EMAIL: "Correo",
       USERNAME: "Nombre de usuario",
       NAME: "Nombre",
+    },
+    FAVORITE_ACCOUNT: {
+      ACCOUNT: "Cuenta",
+      OWNER: "Propietario",
+      ALIAS: "Alias",
+    },
+  },
+  FORMS: {
+    FAVORITE_ACCOUNT: {
+      TITLE: "Crear Alias",
+      OWNER: "Propietario",
+    },
+    SERVICE: {
+      VALIDATION: {
+        NAME_REQUIRED: "Name is required, and must be 3 characters long",
+      },
     },
   },
 };
