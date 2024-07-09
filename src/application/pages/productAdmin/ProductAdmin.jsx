@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom"; // Importa Link
 import { ErrorContainer } from "../../components/ErrorContainer";
 import { useFetchWithToast } from "../../hooks/use-fetch-with-toast";
 import { ProductAdminCard } from "./ProductAdminCard";
@@ -28,14 +28,22 @@ export function ProductsAdmin() {
   console.log({ products }, { hiddenElements });
 
   return (
-    <div className="h-full flex flex-col">
+    <div className="h-full flex flex-col gap-2">
+      <div className="py-2 flex justify-end md:px-4">
+        <Link
+          to="./create"
+          className="px-4 py-2 bg-primary-400 rounded text-white hover:bg-primary-300"
+        >
+          Crear
+        </Link>
+      </div>
       <div className="grow content-start overflow-y-scroll gap-5 md:px-4 grid grid-cols-[repeat(auto-fill,minmax(330px,1fr))]">
         {products.map((product) => (
           <ProductAdminCard
             onShow={() => {
               setHiddenElements((prev) => {
                 // eslint-disable-next-line no-underscore-dangle
-                prev.delete(product._id); // Asegúrate de tener una propiedad única de identificación para productos (como _id)
+                prev.delete(product._id);
                 return new Set(prev);
               });
             }}

@@ -21,6 +21,7 @@ import { FavoriteAccountForm } from "./application/pages/favoriteAccounts/Favori
 import { PrivateUserRoute } from "./application/PrivateUserRoute";
 import { AuthProvider } from "./services/auth";
 import { ProductsAdmin } from "./application/pages/productAdmin/ProductAdmin";
+import { ProductForm } from "./application/pages/productAdmin/ProductForm";
 
 const queryClient = new QueryClient();
 
@@ -132,7 +133,14 @@ const router = createBrowserRouter([
                   },
                   {
                     path: "admin/product",
-                    element: <ProductsAdmin />,
+                    element: <Outlet />,
+                    children: [
+                      { path: "", element: <ProductsAdmin /> },
+                      {
+                        path: "create",
+                        element: <ProductForm />,
+                      },
+                    ],
                   },
                   // MUST BE LAST ALWAYS
                   { path: "*", element: <NotFound /> },
