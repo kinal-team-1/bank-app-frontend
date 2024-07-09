@@ -9,11 +9,33 @@ const en = {
   // TODO: your translations go here
   HI: "Hi {name:string}!",
   TITLE: "Hello World!",
-  BOTTOM_NAVBAR: {
+  NAVBAR: {
     HOME: "Home",
     SERVICES: "Services",
+    PRODUCT: "Product",
     MOVEMENTS: "Movements",
     CURRENCIES: "Currencies",
+    LOG_OUT: "Log out",
+  },
+  ERROR: {
+    SOMETHING_WENT_WRONG: "Something went wrong",
+    PLEASE_TRY_AGAIN_LATER: "Please try again later",
+  },
+  TOAST: {
+    SUCCESS: "Success",
+  },
+  PAGES: {
+    SERVICE: {
+      NAME: "Name",
+      DESCRIPTION: "Description",
+      PRICE: "Price",
+    },
+    PRODUCT: {
+      NAME: "Name",
+      DESCRIPTION: "Description",
+      PRICE: "Price",
+      STOCK: "Stock",
+    },
   },
 };
 

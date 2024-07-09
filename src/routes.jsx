@@ -1,41 +1,79 @@
 import { createBrowserRouter } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { App } from "./App";
 import { Layout } from "./Layout";
 import { LocaleProvider } from "./services/locale";
-import { Home } from "./application/home/Home";
+import { Home } from "./application/pages/home/Home";
+import { DarkModeProvider } from "./services/dark-mode";
+import { SearchProvider } from "./services/search-bar";
+import { Movements } from "./application/pages/movements/Movements";
+import { Services } from "./application/pages/services/Services";
+import { Products } from "./application/pages/product/Product";
+import { NavbarMobileProvider } from "./services/navbar-mobile-service";
+import { NotFound } from "./application/pages/NotFound";
+import { RedirectToHome } from "./application/pages/RedirectToHome";
+
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <RedirectToHome />,
+  },
+  {
+    path: "/:locale",
     element: (
-      <LocaleProvider>
-        <App />
-      </LocaleProvider>
+      <QueryClientProvider client={queryClient}>
+        <LocaleProvider>
+          <DarkModeProvider>
+            <SearchProvider>
+              <NavbarMobileProvider>
+                <App />
+              </NavbarMobileProvider>
+            </SearchProvider>
+          </DarkModeProvider>
+        </LocaleProvider>
+      </QueryClientProvider>
     ),
     children: [
       {
-        path: "/",
+        path: "",
         element: <Layout />,
         children: [
           {
-            path: "/",
+            path: "",
             element: <Home />,
           },
           {
-            path: "/services",
-            element: <div>Hola</div>,
+            path: "services",
+            element: <Services />,
           },
           {
-            path: "/movements",
-            element: <div>Hola</div>,
+            path: "product",
+            element: <Products />,
           },
           {
-            path: "/currencies",
+            path: "movements",
+            element: <Movements />,
+          },
+          {
+            path: "currencies",
             element: <div>Hola</div>,
           },
+          // MUST BE LAST ALWAYS
+          { path: "*", element: <NotFound /> },
         ],
       },
     ],
+  },
+  // MUST BE LAST ALWAYS
+  {
+    path: "*",
+    element: (
+      <DarkModeProvider>
+        <NotFound />
+      </DarkModeProvider>
+    ),
   },
 ]);
 
