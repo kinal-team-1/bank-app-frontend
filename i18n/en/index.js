@@ -30,6 +30,13 @@ const en = {
       PRICE: "Price",
     },
   },
+  FORMS: {
+    SERVICE: {
+      VALIDATION: {
+        NAME_REQUIRED: "Name is required, and must be 3 characters long",
+      },
+    },
+  },
 };
 
 // eslint-disable-next-line import/no-default-export

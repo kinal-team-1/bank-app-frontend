@@ -59,7 +59,7 @@ export function DropDown({ defaultOption, options, onChange }) {
   return (
     <div
       role="presentation"
-      className="text-white relative rounded border flex flex-col justify-center size-[calc(100px/3)]"
+      className="dark:text-white relative rounded border flex flex-col justify-center size-[calc(100px/3)]"
       onKeyDown={handleKeyDown}
     >
       <button
