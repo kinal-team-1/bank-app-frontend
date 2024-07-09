@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowRightToBracket,
+  faBox,
   faClose,
   faFileInvoice,
   faHome,
@@ -30,6 +31,11 @@ export function Navbar() {
       link: `/${locale}/services`,
     },
     {
+      name: LL?.NAVBAR?.PRODUCT(),
+      icon: faBox,
+      link: `/${locale}/product`,
+    },
+    {
       name: LL?.NAVBAR?.MOVEMENTS(),
       icon: faRetweet,
       link: `/${locale}/movements`,
@@ -43,6 +49,11 @@ export function Navbar() {
       name: LL?.NAVBAR?.FAVORITE_ACCOUNTS(),
       icon: faStar,
       link: `/${locale}/favorite-accounts`,
+    },
+    {
+      name: LL?.NAVBAR?.PRODUCT_ADMIN(),
+      icon: faBox,
+      link: `/${locale}/admin/product`,
     },
   ];
 

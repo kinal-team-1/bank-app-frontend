@@ -5,8 +5,12 @@ import { ClientError, FetchError, ServerError } from "./get-services";
 export function getCurrencies() {
   return axios
     .get(`${API_URL}/currency`)
-    .then((res) => [res.data.data, res.data.message, res.status])
+    .then((res) => {
+      console.log(res);
+      return [res.data.data, res.data.message, res.status];
+    })
     .catch((error) => {
+      console.log(error);
       if (error.code === "ERR_NETWORK") {
         throw new FetchError(error.message);
       }

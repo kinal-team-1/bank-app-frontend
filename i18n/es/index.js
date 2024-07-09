@@ -12,10 +12,12 @@ const es = {
   NAVBAR: {
     HOME: "Inicio",
     SERVICES: "Servicios",
+    PRODUCT: "Producto",
     MOVEMENTS: "Movimientos",
     CURRENCIES: "Divisas",
     LOG_OUT: "Cerrar sesión",
     FAVORITE_ACCOUNTS: "Cuentas Favoritas",
+    PRODUCT_ADMIN: "Productos Admin",
   },
   ERROR: {
     SOMETHING_WENT_WRONG: "Algo salió mal",
@@ -40,6 +42,17 @@ const es = {
     FAVORITE_ACCOUNT: {
       TITLE: "Crear Alias",
       OWNER: "Propietario",
+    },
+    SERVICE: {
+      VALIDATION: {
+        NAME_REQUIRED: "Name is required, and must be 3 characters long",
+      },
+    },
+    PRODUCT: {
+      NAME: "Nombre",
+      DESCRIPTION: "Descripción",
+      PRICE: "Precio",
+      STOCK: "Existencias",
     },
   },
 };
