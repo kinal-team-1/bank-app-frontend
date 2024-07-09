@@ -22,6 +22,7 @@ import { PrivateUserRoute } from "./application/PrivateUserRoute";
 import { AuthProvider } from "./services/auth";
 import { ProductsAdmin } from "./application/pages/productAdmin/ProductAdmin";
 import { ProductForm } from "./application/pages/productAdmin/ProductForm";
+import { ComprarProducto } from "./application/pages/product/ComprarProducto";
 
 const queryClient = new QueryClient();
 
@@ -129,7 +130,14 @@ const router = createBrowserRouter([
                   },
                   {
                     path: "product",
-                    element: <Products />,
+                    element: <Outlet />,
+                    children: [
+                      {
+                        path: "",
+                        element: <Products />,
+                      },
+                      { path: ":id", element: <ComprarProducto /> },
+                    ],
                   },
                   {
                     path: "admin/product",
