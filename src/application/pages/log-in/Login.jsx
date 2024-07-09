@@ -31,8 +31,8 @@ export function Login() {
   useEffect(() => {
     if (mutation.isSuccess) {
       const [user, _, __, token] = mutation.data;
-      setUser(user);
       localStorage.setItem("token", token);
+      setUser(user);
       navigate(`/${locale}`);
     }
   }, [mutation.isSuccess]);

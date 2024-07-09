@@ -5,11 +5,12 @@ import { validateToken } from "./application/actions/GET/validate-token";
 
 export function UserValidation() {
   const { user, setUser } = useAuthService();
-
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    console.log({ user });
     async function checkUser() {
+      console.log({ user });
       if (user) return;
 
       const token = localStorage.getItem("token");
@@ -17,7 +18,10 @@ export function UserValidation() {
 
       const [userData] = await validateToken(token);
       console.log({ userData });
-      if (userData) setUser(userData);
+      if (userData) {
+        console.log("SETTING USER");
+        setUser(userData);
+      }
     }
 
     checkUser().then(() => setIsLoading(false));

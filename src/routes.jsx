@@ -4,25 +4,32 @@ import { App } from "./App";
 import { LocaleProvider } from "./services/locale";
 import { DarkModeProvider } from "./services/dark-mode";
 import { SearchProvider } from "./services/search-bar";
+import { Services } from "./application/pages/services/Services";
+import { FavoriteAccounts } from "./application/pages/favoriteAccounts/FavoriteAccounts";
 import { NavbarMobileProvider } from "./services/navbar-mobile-service";
 import { NotFound } from "./application/pages/NotFound";
 import { Layout } from "./Layout";
 import { Home } from "./application/pages/home/Home";
-import { Services } from "./application/pages/services/Services";
 import { Movements } from "./application/pages/movements/Movements";
 import { SUPPORTED_LANGUAGES } from "./config";
 import { ServiceForm } from "./application/pages/services/ServiceForm";
 import { Login } from "./application/pages/log-in/Login";
-import { AuthProvider } from "./services/auth";
 import { UserValidation } from "./UserValidaion";
 import { validateToken } from "./application/actions/GET/validate-token";
+import { FavoriteAccountForm } from "./application/pages/favoriteAccounts/FavoriteAccountForm";
+import { PrivateUserRoute } from "./application/PrivateUserRoute";
+import { AuthProvider } from "./services/auth";
 
 const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
     path: "",
-    element: <UserValidation />,
+    element: (
+      <AuthProvider>
+        <UserValidation />
+      </AuthProvider>
+    ),
     children: [
       {
         loader: async () => {
@@ -32,7 +39,8 @@ const router = createBrowserRouter([
 
           const token = localStorage.getItem("token");
           if (!token) return redirect(`${locale}/login`);
-          const user = await validateToken(token);
+          const [user] = await validateToken(token);
+          console.log({ user, token });
           if (!user) return redirect(`${locale}/login`);
 
           return redirect(`/${locale}`);
@@ -43,17 +51,15 @@ const router = createBrowserRouter([
         path: "/:locale",
         element: (
           <QueryClientProvider client={queryClient}>
-            <AuthProvider>
-              <LocaleProvider>
-                <DarkModeProvider>
-                  <SearchProvider>
-                    <NavbarMobileProvider>
-                      <App />
-                    </NavbarMobileProvider>
-                  </SearchProvider>
-                </DarkModeProvider>
-              </LocaleProvider>
-            </AuthProvider>
+            <LocaleProvider>
+              <DarkModeProvider>
+                <SearchProvider>
+                  <NavbarMobileProvider>
+                    <App />
+                  </NavbarMobileProvider>
+                </SearchProvider>
+              </DarkModeProvider>
+            </LocaleProvider>
           </QueryClientProvider>
         ),
         children: [
@@ -62,46 +68,66 @@ const router = createBrowserRouter([
             element: <Login />,
           },
           {
-            loader: () => {
-              if (window.location.pathname === "/") return null;
-              const locale = window.location.pathname.split("/")[1];
-
-              if (!SUPPORTED_LANGUAGES.includes(locale)) {
-                return redirect("/not-found");
-              }
-              return null;
-            },
             path: "",
-            element: <Layout />,
+            element: <PrivateUserRoute />,
             children: [
               {
+                loader: () => {
+                  if (window.location.pathname === "/") return null;
+                  const locale = window.location.pathname.split("/")[1];
+
+                  if (!SUPPORTED_LANGUAGES.includes(locale)) {
+                    return redirect("/not-found");
+                  }
+                  return null;
+                },
                 path: "",
-                element: <Home />,
-              },
-              {
-                path: "services",
-                element: <Outlet />,
+                element: <Layout />,
                 children: [
                   {
                     path: "",
-                    element: <Services />,
+                    element: <Home />,
                   },
                   {
-                    path: "create",
-                    element: <ServiceForm />,
+                    path: "services",
+                    element: <Outlet />,
+                    children: [
+                      {
+                        path: "",
+                        element: <Services />,
+                      },
+                      {
+                        path: "create",
+                        element: <ServiceForm />,
+                      },
+                    ],
                   },
+                  {
+                    path: "movements",
+                    element: <Movements />,
+                  },
+                  {
+                    path: "currencies",
+                    element: <div>Hola</div>,
+                  },
+                  {
+                    path: "favorite-accounts",
+                    element: <Outlet />,
+                    children: [
+                      {
+                        path: "",
+                        element: <FavoriteAccounts />,
+                      },
+                      {
+                        path: "create",
+                        element: <FavoriteAccountForm />,
+                      },
+                    ],
+                  },
+                  // MUST BE LAST ALWAYS
+                  { path: "*", element: <NotFound /> },
                 ],
               },
-              {
-                path: "movements",
-                element: <Movements />,
-              },
-              {
-                path: "currencies",
-                element: <div>Hola</div>,
-              },
-              // MUST BE LAST ALWAYS
-              { path: "*", element: <NotFound /> },
             ],
           },
         ],

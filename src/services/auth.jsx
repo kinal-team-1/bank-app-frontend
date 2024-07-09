@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 
 /**
  *
- * @type {React.Context<{user: null, setUser: React.Dispatch<User>}>}
+ * @type {React.Context<{user?: User, setUser: React.Dispatch<User>}>}
  */
 export const AuthContext = createContext({
   user: null,

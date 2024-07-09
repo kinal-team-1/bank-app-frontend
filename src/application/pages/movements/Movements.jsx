@@ -1,9 +1,9 @@
 import { useQueries } from "@tanstack/react-query";
 import { useParams, useSearchParams } from "react-router-dom";
 import { searchable } from "../../components/Searchable";
-import { getTransactions } from "../../actions/GET/get-transactions";
+import { getTransactions } from "../../actions/GET/get-transactions.js";
 import { getTransferences } from "../../actions/GET/get-transferences";
-import { getPayouts } from "../../actions/GET/get-payouts";
+import { getPayouts } from "../../actions/GET/get-payouts.js";
 
 export function Movements() {
   // const [hiddenELements, setHiddenElements] = useState([]);

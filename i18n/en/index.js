@@ -15,6 +15,7 @@ const en = {
     MOVEMENTS: "Movements",
     CURRENCIES: "Currencies",
     LOG_OUT: "Log out",
+    FAVORITE_ACCOUNTS: "Favorite Accounts",
   },
   ERROR: {
     SOMETHING_WENT_WRONG: "Something went wrong",
@@ -28,6 +29,17 @@ const en = {
       NAME: "Name",
       DESCRIPTION: "Description",
       PRICE: "Price",
+    },
+    FAVORITE_ACCOUNT: {
+      ACCOUNT: "Account",
+      OWNER: "Owner",
+      ALIAS: "alias",
+    },
+  },
+  FORMS: {
+    FAVORITE_ACCOUNT: {
+      TITLE: "New Account",
+      OWNER: "owner",
     },
   },
   FORMS: {

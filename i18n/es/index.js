@@ -15,6 +15,7 @@ const es = {
     MOVEMENTS: "Movimientos",
     CURRENCIES: "Divisas",
     LOG_OUT: "Cerrar sesión",
+    FAVORITE_ACCOUNTS: "Cuentas Favoritas",
   },
   ERROR: {
     SOMETHING_WENT_WRONG: "Algo salió mal",
@@ -28,6 +29,17 @@ const es = {
       NAME: "Nombre",
       DESCRIPTION: "Descripción",
       PRICE: "Precio",
+    },
+    FAVORITE_ACCOUNT: {
+      ACCOUNT: "Cuenta",
+      OWNER: "Propietario",
+      ALIAS: "Alias",
+    },
+  },
+  FORMS: {
+    FAVORITE_ACCOUNT: {
+      TITLE: "Crear Alias",
+      OWNER: "Propietario",
     },
   },
 };
