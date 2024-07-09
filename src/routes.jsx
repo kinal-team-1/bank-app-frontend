@@ -6,6 +6,7 @@ import { DarkModeProvider } from "./services/dark-mode";
 import { SearchProvider } from "./services/search-bar";
 import { Services } from "./application/pages/services/Services";
 import { FavoriteAccounts } from "./application/pages/favoriteAccounts/FavoriteAccounts";
+import { Products } from "./application/pages/product/Product";
 import { NavbarMobileProvider } from "./services/navbar-mobile-service";
 import { NotFound } from "./application/pages/NotFound";
 import { Layout } from "./Layout";
@@ -19,6 +20,7 @@ import { validateToken } from "./application/actions/GET/validate-token";
 import { FavoriteAccountForm } from "./application/pages/favoriteAccounts/FavoriteAccountForm";
 import { PrivateUserRoute } from "./application/PrivateUserRoute";
 import { AuthProvider } from "./services/auth";
+import { ProductsAdmin } from "./application/pages/productAdmin/ProductAdmin";
 
 const queryClient = new QueryClient();
 
@@ -123,6 +125,14 @@ const router = createBrowserRouter([
                         element: <FavoriteAccountForm />,
                       },
                     ],
+                  },
+                  {
+                    path: "product",
+                    element: <Products />,
+                  },
+                  {
+                    path: "admin/product",
+                    element: <ProductsAdmin />,
                   },
                   // MUST BE LAST ALWAYS
                   { path: "*", element: <NotFound /> },
