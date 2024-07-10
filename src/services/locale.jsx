@@ -58,3 +58,4 @@ LocaleProvider.propTypes = {
 export const useLocaleService = () => {
   return useContext(LocaleContext);
 };
+
