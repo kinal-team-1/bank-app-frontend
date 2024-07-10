@@ -2,14 +2,12 @@ import axios from "axios";
 import { API_URL } from "../../../config";
 import { ClientError, FetchError, ServerError } from "../GET/get-services";
 
-export function createPayout({ payout, locale }) {
-  console.log(`${API_URL}/payout`, "ASKLASJLAKSJ");
-
+export function createPurchase({ purchase, locale }) {
   return axios
     .post(
-      `${API_URL}/payout`,
+      `${API_URL}/purchase`,
       // eslint-disable-next-line no-underscore-dangle
-      payout,
+      purchase,
       {
         headers: {
           "Accept-Language": locale,

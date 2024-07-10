@@ -3,8 +3,8 @@ import { useParams } from "react-router-dom";
 import { searchable } from "../../components/Searchable";
 import { useLocaleService } from "../../../services/locale";
 import { useMutationWithToast } from "../../hooks/use-mutation-with-toast";
-import { createPurchase } from "../../actions/POST/create-puchase";
 import { useAuthService } from "../../../services/auth";
+import { createPayout } from "../../actions/POST/create-puchase";
 
 // HIGHER ORDER COMPONENT
 export const ServiceCard = searchable(
@@ -12,17 +12,17 @@ export const ServiceCard = searchable(
     const { locale } = useParams();
     const { LL } = useLocaleService();
     const { user: userLogged } = useAuthService();
-    const mutation = useMutationWithToast(createPurchase, {
-      invalidateQueries: ["products"],
+    const mutation = useMutationWithToast(createPayout, {
+      invalidateQueries: ["services"],
     });
 
     useEffect(() => {
-      if (!mutation.isError) return;
+      if (!mutation.isError || mutation.isSuccess) return;
 
       setTimeout(() => {
         mutation.reset();
       }, 3000);
-    }, [mutation.isError]);
+    }, [mutation.isSuccess, mutation.isError]);
 
     return (
       <form
@@ -34,7 +34,7 @@ export const ServiceCard = searchable(
             payout: {
               service: id,
               total: price,
-              debited_account: userLogged._id,
+              debited_account: userLogged.main_account,
             },
             locale,
           });
@@ -62,12 +62,12 @@ export const ServiceCard = searchable(
         </p>
         <button
           type="submit"
-          className={`${mutation.isIdle ? "bg-primary-400" : "bg-primary-300"} w-full rounded py-2 items-end hover:bg-primary-300`}
+          className={`${mutation.isIdle ? "bg-green-500" : "bg-green-300"} w-full rounded py-2 items-end hover:bg-green-300`}
         >
-          {mutation.isIdle && <span>Eliminar</span>}
+          {mutation.isIdle && <span>Comprar</span>}
           {mutation.isPending && (
             <>
-              <span>Eliminando ...</span>
+              <span>Comprando</span>
               <span className="animate-spin size-[25px] border-4 border-t-silver-500 rounded-full" />
             </>
           )}
