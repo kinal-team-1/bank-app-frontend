@@ -131,12 +131,6 @@ function TopBarButtons() {
             >
               <span className="inline-block">User menu</span>
             </Link>
-            <Link
-              to={`/${locale}/home`}
-              className="block w-full text-center px-4 py-2 hover:bg-primary-500 hover:text-vulcan-950 rounded"
-            >
-              <span className="inline-block">Account</span>
-            </Link>
           </div>
         )}
       </div>

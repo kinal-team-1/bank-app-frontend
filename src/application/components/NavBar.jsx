@@ -9,16 +9,18 @@ import {
   faRetweet,
   faStar,
 } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDarkModeService } from "../../services/dark-mode";
 import { useLocaleService } from "../../services/locale";
 import { useNavbarMobileService } from "../../services/navbar-mobile-service";
+import { useAuthService } from "../../services/auth";
 
 export function Navbar() {
   const { isDark } = useDarkModeService();
   const { LL, locale } = useLocaleService();
   const { isNavbarOpen, setIsNavbarOpen } = useNavbarMobileService();
-
+  const { setUser } = useAuthService();
+  const navigate = useNavigate();
   const routes = [
     {
       name: LL?.NAVBAR?.HOME(),
@@ -95,7 +97,15 @@ export function Navbar() {
         </div>
       </div>
       {/* MIGHT CHANGE TO <Link /> */}
-      <button type="button" className="flex gap-2 items-center">
+      <button
+        onClick={() => {
+          setUser(null);
+          localStorage.removeItem("token");
+          navigate("/login");
+        }}
+        type="button"
+        className="flex gap-2 items-center"
+      >
         <FontAwesomeIcon icon={faArrowRightToBracket} />
         <span>{LL?.NAVBAR?.LOG_OUT()}</span>
       </button>
