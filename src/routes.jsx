@@ -28,12 +28,9 @@ import { UserAdminForm } from "./application/pages/user/UserAdminForm";
 import { UserAdmin } from "./application/pages/user/UserAdmin";
 import { TransferenceForm } from "./application/pages/transference/TransferenceForm";
 import { Accounts } from "./application/pages/accounts/Accounts";
-<<<<<<< HEAD
 import { Payout } from "./application/pages/payout/payout";
-=======
-import { ComprarProducto } from "./application/pages/product/ComprarProducto";
 import { Purchases } from "./application/pages/purchase/Purchase";
->>>>>>> 18bc36a9636d038707d56ab38b927294229c59ef
+import { ComprarProducto } from "./application/pages/product/ComprarProducto";
 
 const queryClient = new QueryClient();
 

@@ -65,19 +65,17 @@ const en = {
       NAME: "Name",
       BALANCE: "Balance",
     },
-<<<<<<< HEAD
     PAYOUT: {
       SERVICE: "Service",
       TOTAL: "Total ",
       DEBITED_ACCOUNT: "Debited account",
-=======
+    },
     PURCHASE: {
-      PURCHASER: "Purchaser",
+      PURCHASER: "Purchases",
       PRODUCT: "Product",
       QUANTITY: "Quantity",
       TOTAL: "Total",
-      BUY_NOW: "Buy Now",
->>>>>>> 18bc36a9636d038707d56ab38b927294229c59ef
+      BUY_NOW: "Buy now",
     },
   },
   FORMS: {
