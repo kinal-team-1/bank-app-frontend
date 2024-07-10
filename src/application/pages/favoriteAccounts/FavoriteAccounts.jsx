@@ -4,9 +4,11 @@ import { getFavoriteAccounts } from "../../actions/GET/get-favorite-accounts";
 import { ErrorContainer } from "../../components/ErrorContainer";
 import { useFetchWithToast } from "../../hooks/use-fetch-with-toast";
 import { FavoriteAccountCard } from "./FavoriteAccountCard";
+import { useAuthService } from "../../../services/auth";
 
 export function FavoriteAccounts() {
   const [hiddenElements, setHiddenElements] = useState(new Set());
+  const { user } = useAuthService();
   const { locale } = useParams();
   const [params] = useSearchParams();
   const {
@@ -14,10 +16,8 @@ export function FavoriteAccounts() {
     isLoading,
     error,
   } = useFetchWithToast({
-    queryKey: [
-      "favorite-accounts",
-      { locale, params, userId: "6688d000cf82a5bb663e69e1" },
-    ],
+    // eslint-disable-next-line no-underscore-dangle
+    queryKey: ["favorite-accounts", { locale, params, userId: user._id }],
     queryFn: getFavoriteAccounts,
   });
 
@@ -39,7 +39,7 @@ export function FavoriteAccounts() {
           Crear
         </Link>
       </div>
-      <div className="grow content-start overflow-y-scroll gap-5 md:px-4 grid grid-cols-[repeat(auto-fill,minmax(330px,1fr))]">
+      <div className="grow content-start overflow-y-scroll border gap-5 md:px-4 grid grid-cols-[repeat(auto-fill,minmax(330px,1fr))]">
         {favoriteAccounts.map((account) => (
           <FavoriteAccountCard
             onShow={() => {

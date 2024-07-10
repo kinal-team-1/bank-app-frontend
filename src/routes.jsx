@@ -22,6 +22,7 @@ import { PrivateUserRoute } from "./application/PrivateUserRoute";
 import { AuthProvider } from "./services/auth";
 import { ProductsAdmin } from "./application/pages/productAdmin/ProductAdmin";
 import { ProductForm } from "./application/pages/productAdmin/ProductForm";
+import { TransferenceForm } from "./application/pages/transference/TransferenceForm.jsx";
 
 const queryClient = new QueryClient();
 
@@ -141,6 +142,10 @@ const router = createBrowserRouter([
                         element: <ProductForm />,
                       },
                     ],
+                  },
+                  {
+                    path: "transference",
+                    element: <TransferenceForm />,
                   },
                   // MUST BE LAST ALWAYS
                   { path: "*", element: <NotFound /> },
