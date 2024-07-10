@@ -1,16 +1,21 @@
 import axios from "axios";
 import { API_URL } from "../../../config";
-import { ClientError, FetchError, ServerError } from "./get-services";
+import { ClientError, FetchError, ServerError } from "../GET/get-services";
 
-export function getCurrencies() {
+export function postUserAdmin({ user, locale }) {
   return axios
-    .get(`${API_URL}/currency`)
-    .then((res) => {
-      console.log(res);
-      return [res.data.data, res.data.message, res.status];
-    })
+    .post(
+      `${API_URL}/admin`,
+      // eslint-disable-next-line no-underscore-dangle
+      user,
+      {
+        headers: {
+          "Accept-Language": locale,
+        },
+      },
+    )
+    .then((res) => [res.data.data, res.data.message, res.status])
     .catch((error) => {
-      console.log(error);
       if (error.code === "ERR_NETWORK") {
         throw new FetchError(error.message);
       }

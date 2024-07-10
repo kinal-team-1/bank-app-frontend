@@ -2,15 +2,15 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { searchable } from "../../components/Searchable";
 import { useLocaleService } from "../../../services/locale";
-import { deleteUser } from "../../actions/DELETE/delete-user";
+import { deleteAdminUser } from "../../actions/DELETE/delete-adminUser";
 import { useMutationWithToast } from "../../hooks/use-mutation-with-toast";
 
 // HIGHER ORDER COMPONENT
-export const UserCard = searchable(
+export const UserAdminCard = searchable(
   ({ HighlightText, email, username, name, id }) => {
     const { locale } = useParams();
     const { LL } = useLocaleService();
-    const mutation = useMutationWithToast(deleteUser, {
+    const mutation = useMutationWithToast(deleteAdminUser, {
       invalidateQueries: ["users"],
     });
 
@@ -28,7 +28,7 @@ export const UserCard = searchable(
           e.preventDefault();
           if (!mutation.isIdle) return;
 
-          mutation.mutate({ userId: id, locale });
+          mutation.mutate({ adminUserId: id, locale });
         }}
         className="flex flex-col justify-between border border-gray-200 rounded-md p-4 shadow-sm"
       >

@@ -6,6 +6,7 @@ import { DarkModeProvider } from "./services/dark-mode";
 import { SearchProvider } from "./services/search-bar";
 import { Services } from "./application/pages/services/Services";
 import { FavoriteAccounts } from "./application/pages/favoriteAccounts/FavoriteAccounts";
+import { Products } from "./application/pages/product/Product";
 import { NavbarMobileProvider } from "./services/navbar-mobile-service";
 import { NotFound } from "./application/pages/NotFound";
 import { User } from "./application/pages/user/User";
@@ -20,7 +21,11 @@ import { validateToken } from "./application/actions/GET/validate-token";
 import { FavoriteAccountForm } from "./application/pages/favoriteAccounts/FavoriteAccountForm";
 import { PrivateUserRoute } from "./application/PrivateUserRoute";
 import { AuthProvider } from "./services/auth";
-import UserForm from "./application/pages/user/UserForm";
+import { UserForm } from "./application/pages/user/UserForm";
+import { ProductsAdmin } from "./application/pages/productAdmin/ProductAdmin";
+import { ProductForm } from "./application/pages/productAdmin/ProductForm";
+import { UserAdminForm } from "./application/pages/user/UserAdminForm";
+import { UserAdmin } from "./application/pages/user/UserAdmin";
 
 const queryClient = new QueryClient();
 
@@ -136,7 +141,36 @@ const router = createBrowserRouter([
                       },
                       {
                         path: "create",
-                        element: <UserForm />,  
+                        element: <UserForm />,
+                      },
+                    ],
+                  },
+                  {
+                    path: "admin",
+                    element: <Outlet />,
+                    children: [
+                      {
+                        path: "",
+                        element: <UserAdmin />,
+                      },
+                      {
+                        path: "create",
+                        element: <UserAdminForm />,
+                      },
+                    ],
+                  },
+                  {
+                    path: "product",
+                    element: <Products />,
+                  },
+                  {
+                    path: "admin/product",
+                    element: <Outlet />,
+                    children: [
+                      { path: "", element: <ProductsAdmin /> },
+                      {
+                        path: "create",
+                        element: <ProductForm />,
                       },
                     ],
                   },

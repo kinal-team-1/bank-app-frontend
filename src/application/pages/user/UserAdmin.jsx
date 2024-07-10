@@ -1,11 +1,11 @@
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import { useState } from "react";
-import { getUsers } from "../../actions/GET/get-users";
+import { getAdminUser } from "../../actions/GET/get-adminUser";
 import { ErrorContainer } from "../../components/ErrorContainer";
 import { useFetchWithToast } from "../../hooks/use-fetch-with-toast";
-import { UserCard } from "./UserCard";
+import { UserAdminCard } from "./UserAdminCard";
 
-export function User() {
+export function UserAdmin() {
   const [hiddenElements, setHiddenElements] = useState(new Set());
   const { locale } = useParams();
   const [params] = useSearchParams();
@@ -14,8 +14,8 @@ export function User() {
     isLoading,
     error,
   } = useFetchWithToast({
-    queryKey: ["users", { locale, params }],
-    queryFn: getUsers,
+    queryKey: ["admins", { locale, params }],
+    queryFn: getAdminUser,
   });
 
   if (isLoading) return <div>Loading...</div>;
@@ -24,8 +24,6 @@ export function User() {
 
   if (!users) return null;
 
-  console.log({ users }, { hiddenElements });
-
   return (
     <div className="h-full flex flex-col">
       <div className="flex justify-end">
@@ -33,12 +31,12 @@ export function User() {
           className="bg-primary-400 rounded py-2 px-4 text-white"
           to="./create"
         >
-          Crear
+          Crear Admin
         </Link>
       </div>
       <div className="grow content-start overflow-y-scroll gap-5 md:px-4 grid grid-cols-[repeat(auto-fill,minmax(330px,1fr))]">
         {users.map((user) => (
-          <UserCard
+          <UserAdminCard
             onShow={() => {
               setHiddenElements((prev) => {
                 // eslint-disable-next-line no-underscore-dangle
@@ -60,14 +58,6 @@ export function User() {
             password={user.password}
             name={user.name}
             last_name={user.last_name}
-            address={user.address}
-            DPI={user.DPI}
-            phone_number={user.phone_number}
-            job_name={user.job_name}
-            monthly_income={user.monthly_income}
-            currency_income={user.currency_income}
-            main_account={user.main_account}
-            accounts={user.accounts}
             // eslint-disable-next-line no-underscore-dangle
             id={user._id}
           />

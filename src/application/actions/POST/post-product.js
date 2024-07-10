@@ -2,10 +2,9 @@ import axios from "axios";
 import { API_URL } from "../../../config";
 import { ClientError, FetchError, ServerError } from "../GET/get-services";
 
-export function deleteUser({ userId, locale }) {
-  console.log({ userId });
+export function postProduct({ product, locale }) {
   return axios
-    .delete(`${API_URL}/user/${userId}`, {
+    .post(`${API_URL}/product`, product, {
       headers: {
         "Accept-Language": locale,
       },
@@ -16,7 +15,7 @@ export function deleteUser({ userId, locale }) {
         throw new FetchError(error.message);
       }
 
-      if (error.response && error.response.status < 500) {
+      if (error.response.status < 500) {
         throw new ClientError(
           error.response.data.message,
           error.response.status,

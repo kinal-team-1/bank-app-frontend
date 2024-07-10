@@ -11,3 +11,4 @@
     "include": ["./src/**/*",],
     "exclude": ["./i18n/**/*", "node_modules", "eslint-custom-rules"]
 }
+

@@ -12,11 +12,13 @@ const en = {
   NAVBAR: {
     HOME: "Home",
     SERVICES: "Services",
+    PRODUCT: "Product",
     MOVEMENTS: "Movements",
     CURRENCIES: "Currencies",
     LOG_OUT: "Log out",
     USER: "users",
     FAVORITE_ACCOUNTS: "Favorite Accounts",
+    PRODUCT_ADMIN: "Admin Prodcuts",
   },
   ERROR: {
     SOMETHING_WENT_WRONG: "Something went wrong",
@@ -59,6 +61,12 @@ const en = {
       VALIDATION: {
         NAME_REQUIRED: "Name is required, and must be 3 characters long",
       },
+    },
+    PRODUCT: {
+      NAME: "Name",
+      DESCRIPTION: "Description",
+      PRICE: "Price",
+      STOCK: "Stock",
     },
   },
 };

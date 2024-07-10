@@ -238,7 +238,7 @@ export function UserForm() {
           </div>
 
           <label className="col-span-full md:col-span-2 md:text-end text-silver-500 pt-2">
-            ajskldjaslkdjs
+            Main Account
           </label>
           <div className="col-span-full md:col-span-4">
             <input

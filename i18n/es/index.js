@@ -12,11 +12,13 @@ const es = {
   NAVBAR: {
     HOME: "Inicio",
     SERVICES: "Servicios",
+    PRODUCT: "Producto",
     MOVEMENTS: "Movimientos",
     CURRENCIES: "Divisas",
     LOG_OUT: "Cerrar sesión",
     USER: "Usuarios",
     FAVORITE_ACCOUNTS: "Cuentas Favoritas",
+    PRODUCT_ADMIN: "Productos Admin",
   },
   ERROR: {
     SOMETHING_WENT_WRONG: "Algo salió mal",
@@ -35,6 +37,14 @@ const es = {
       EMAIL: "Correo",
       USERNAME: "Nombre de usuario",
       NAME: "Nombre",
+      PASSWORD: "Contraseña",
+      LAST_NAME: "Apellido",
+      ADDRESS: "Dirección",
+      DPI: "DPI",
+      PHONE_NUMBER: "Numero de telefono",
+      JOB_NAME: "Nombre del trabajo",
+      MONTHLY_INCOME: "Ingreso Mensual",
+      CURRENCY_INCOME: "Ingreso Divisas",
     },
     FAVORITE_ACCOUNT: {
       ACCOUNT: "Cuenta",
@@ -51,6 +61,12 @@ const es = {
       VALIDATION: {
         NAME_REQUIRED: "Name is required, and must be 3 characters long",
       },
+    },
+    PRODUCT: {
+      NAME: "Nombre",
+      DESCRIPTION: "Descripción",
+      PRICE: "Precio",
+      STOCK: "Existencias",
     },
   },
 };
