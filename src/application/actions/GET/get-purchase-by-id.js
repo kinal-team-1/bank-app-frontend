@@ -1,47 +1,12 @@
-// eslint-disable-next-line max-classes-per-file
-import axios from 'axios';
-import { API_URL } from '../../../config';
+import axios from "axios";
+import { API_URL } from "../../../config";
+import { ClientError, FetchError, ServerError } from "./get-services";
 
-export class ClientError extends Error {
-  constructor(message, statusCode, errors) {
-    super(message);
-    this.statusCode = statusCode;
-    this.errors = errors;
-    this.name = "ClientError";
-  }
-}
-
-export class ServerError extends Error {
-  constructor(message) {
-    super(message);
-    this.statusCode = 500;
-    this.errors = [];
-    this.name = "ServerError";
-  }
-}
-
-export class FetchError extends Error {
-  constructor(message) {
-    super(message);
-    this.statusCode = 0;
-    this.errors = [];
-    this.name = "FetchError";
-  }
-}
-
-/**
- *
- * @param queryKey
- * @param signal
- * @returns {Promise<any>}
- * @throws {ClientError | ServerError | FetchError}
- */
-export function getPurchases({ queryKey, signal }) {
-  const [_, { locale, params }] = queryKey; // Ignoramos el primer elemento del array (en este caso "purchases")
+export function getProductById({ queryKey }) {
+  const [, { purchaseId, locale }] = queryKey;
 
   return axios
-    .get(`${API_URL}/purchase?${params}`, {
-      signal,
+    .get(`${API_URL}/purchase${purchaseId}`, {
       headers: {
         "Accept-Language": locale,
       },
@@ -52,7 +17,7 @@ export function getPurchases({ queryKey, signal }) {
         throw new FetchError(error.message);
       }
 
-      if (error.response && error.response.status < 500) {
+      if (error.response.status < 500) {
         throw new ClientError(
           error.response.data.message,
           error.response.status,
@@ -63,3 +28,4 @@ export function getPurchases({ queryKey, signal }) {
       throw new ServerError(error.message);
     });
 }
+

@@ -3,7 +3,7 @@ import { useParams, useSearchParams } from "react-router-dom";
 import { ErrorContainer } from "../../components/ErrorContainer";
 import { useFetchWithToast } from "../../hooks/use-fetch-with-toast";
 import { PurchaseCard } from "./PurchaseCard";
-import { getPurchases } from "../../actions/GET/get-purchase-by-id";
+import { getPurchases } from "../../actions/GET/get-purchases";
 
 export function Purchases() {
   const [hiddenElements, setHiddenElements] = useState(new Set());
@@ -11,7 +11,7 @@ export function Purchases() {
   const [params] = useSearchParams();
 
   const {
-    data: [purchases] = [],
+    data: [purchase] = [],
     isLoading,
     error,
   } = useFetchWithToast({
@@ -23,7 +23,7 @@ export function Purchases() {
 
   if (error) return <ErrorContainer />;
 
-  if (!purchases) return null;
+  if (!purchase) return null;
 
   console.log({ purchases }, { hiddenElements });
 
