@@ -64,6 +64,11 @@ const es = {
       NAME: "Nombre",
       BALANCE: "Balance",
     },
+    PAYOUT: {
+      SERVICE: "Servicio",
+      TOTAL: "Total ",
+      DEBITED_ACCOUNT: "Cuenta debitada",
+    },
   },
   FORMS: {
     FAVORITE_ACCOUNT: {

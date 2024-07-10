@@ -28,6 +28,7 @@ import { UserAdminForm } from "./application/pages/user/UserAdminForm";
 import { UserAdmin } from "./application/pages/user/UserAdmin";
 import { TransferenceForm } from "./application/pages/transference/TransferenceForm";
 import { Accounts } from "./application/pages/accounts/Accounts";
+import { Payout } from "./application/pages/payout/payout";
 
 const queryClient = new QueryClient();
 
@@ -96,6 +97,10 @@ const router = createBrowserRouter([
                   {
                     path: "",
                     element: <Accounts />,
+                  },
+                  {
+                    path: "payout",
+                    element: <Payout />,
                   },
                   {
                     path: "movements",

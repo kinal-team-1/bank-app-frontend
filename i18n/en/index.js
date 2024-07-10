@@ -64,6 +64,11 @@ const en = {
       NAME: "Name",
       BALANCE: "Balance",
     },
+    PAYOUT: {
+      SERVICE: "Service",
+      TOTAL: "Total ",
+      DEBITED_ACCOUNT: "Debited account",
+    },
   },
   FORMS: {
     FAVORITE_ACCOUNT: {
