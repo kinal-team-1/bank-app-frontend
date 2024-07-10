@@ -25,8 +25,6 @@ export function ProductsAdmin() {
 
   if (!products) return null;
 
-  console.log({ products }, { hiddenElements });
-
   return (
     <div className="h-full flex flex-col gap-2">
       <div className="py-2 flex justify-end md:px-4">

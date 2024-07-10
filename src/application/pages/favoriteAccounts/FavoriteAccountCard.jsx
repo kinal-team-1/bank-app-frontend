@@ -18,7 +18,7 @@ export const FavoriteAccountCard = searchable(
           <h3 className="text-primary-400">
             {LL?.PAGES?.FAVORITE_ACCOUNT?.ACCOUNT?.()}
           </h3>
-          <HighlightText>{account}</HighlightText>
+          <HighlightText>{account.name}</HighlightText>
         </p>
       </div>
     );

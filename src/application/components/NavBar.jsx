@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowRightToBracket,
+  faBank,
   faBox,
   faClose,
   faFileInvoice,
@@ -76,14 +77,19 @@ export function Navbar() {
       icon: faMoneyBillTransfer,
       link: `/${locale}/transference`,
     },
+    {
+      name: LL?.NAVBAR?.PURCHASES(),
+      icon: faBank,
+      link: `/${locale}/purchases`,
+    },
   ];
 
   return (
     <div
       data-isopen={isNavbarOpen || null}
-      className="md:w-[250px] shrink-0 w-0 overflow-hidden transition-[width_padding] data-[isopen]:flex md:data-[isopen]:w-[250px] data-[isopen]:w-full md:flex dark:text-silver-400 data-[isopen]:border-r md:border-r border-r-silver-400 data-[isopen]:px-3 md:px-3 py-5 flex-col justify-between"
+      className="md:w-[250px] shrink-0 w-0 overflow-hidden transition-[width_padding] data-[isopen]:flex md:data-[isopen]:w-[250px] data-[isopen]:w-full md:flex dark:text-silver-400 data-[isopen]:border-r md:border-r border-r-silver-400 data-[isopen]:px-3 md:px-3 py-5 flex-col justify-between h-full"
     >
-      <div className="flex flex-col gap-5 h-full">
+      <div className="flex flex-col gap-5 h-full overflow-hidden overflow-y-scroll">
         <div className="md:invisible">
           <button
             type="button"

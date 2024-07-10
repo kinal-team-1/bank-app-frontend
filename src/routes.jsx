@@ -28,7 +28,12 @@ import { UserAdminForm } from "./application/pages/user/UserAdminForm";
 import { UserAdmin } from "./application/pages/user/UserAdmin";
 import { TransferenceForm } from "./application/pages/transference/TransferenceForm";
 import { Accounts } from "./application/pages/accounts/Accounts";
+<<<<<<< HEAD
 import { Payout } from "./application/pages/payout/payout";
+=======
+import { ComprarProducto } from "./application/pages/product/ComprarProducto";
+import { Purchases } from "./application/pages/purchase/Purchase";
+>>>>>>> 18bc36a9636d038707d56ab38b927294229c59ef
 
 const queryClient = new QueryClient();
 
@@ -111,6 +116,10 @@ const router = createBrowserRouter([
                     element: <div>Hola</div>,
                   },
                   {
+                    path: "purchases",
+                    element: <Purchases />,
+                  },
+                  {
                     path: "favorite-accounts",
                     element: <Outlet />,
                     children: [
@@ -154,7 +163,14 @@ const router = createBrowserRouter([
                   },
                   {
                     path: "product",
-                    element: <Products />,
+                    element: <Outlet />,
+                    children: [
+                      {
+                        path: "",
+                        element: <Products />,
+                      },
+                      { path: ":id", element: <ComprarProducto /> },
+                    ],
                   },
                   {
                     path: "admin/product",

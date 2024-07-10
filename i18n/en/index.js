@@ -22,6 +22,7 @@ const en = {
     USER_ADMIN: "User Admin",
     SERVICES_ADMIN: "Admin services",
     TRANSFERENCE: "Transference",
+    PURCHASES: "Purchases",
   },
   ERROR: {
     SOMETHING_WENT_WRONG: "Something went wrong",
@@ -64,10 +65,19 @@ const en = {
       NAME: "Name",
       BALANCE: "Balance",
     },
+<<<<<<< HEAD
     PAYOUT: {
       SERVICE: "Service",
       TOTAL: "Total ",
       DEBITED_ACCOUNT: "Debited account",
+=======
+    PURCHASE: {
+      PURCHASER: "Purchaser",
+      PRODUCT: "Product",
+      QUANTITY: "Quantity",
+      TOTAL: "Total",
+      BUY_NOW: "Buy Now",
+>>>>>>> 18bc36a9636d038707d56ab38b927294229c59ef
     },
   },
   FORMS: {
