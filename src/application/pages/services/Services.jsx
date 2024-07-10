@@ -50,7 +50,7 @@ export function Services() {
             name={service.name}
             description={service.description}
             price={service.price}
-            currency={service.currency}
+            currency={service.currency.key}
           />
         ))}
       </div>

@@ -1,13 +1,46 @@
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { searchable } from "../../components/Searchable";
 import { useLocaleService } from "../../../services/locale";
+import { useMutationWithToast } from "../../hooks/use-mutation-with-toast";
+import { createPurchase } from "../../actions/POST/create-puchase";
+import { useAuthService } from "../../../services/auth";
 
 // HIGHER ORDER COMPONENT
 export const ServiceCard = searchable(
-  ({ HighlightText, name, description, price, currency }) => {
+  ({ HighlightText, name, description, price, currency, id }) => {
+    const { locale } = useParams();
     const { LL } = useLocaleService();
+    const { user: userLogged } = useAuthService();
+    const mutation = useMutationWithToast(createPurchase, {
+      invalidateQueries: ["products"],
+    });
+
+    useEffect(() => {
+      if (!mutation.isError) return;
+
+      setTimeout(() => {
+        mutation.reset();
+      }, 3000);
+    }, [mutation.isError]);
 
     return (
-      <div className="border border-gray-200 rounded-md p-4 shadow-sm">
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          if (!mutation.isIdle) return;
+
+          mutation.mutate({
+            payout: {
+              service: id,
+              total: price,
+              debited_account: userLogged._id,
+            },
+            locale,
+          });
+        }}
+        className="border border-gray-200 rounded-md p-4 shadow-sm"
+      >
         <h2 className="text-lg font-semibold">
           <h3 className="text-primary-400">{LL?.PAGES?.SERVICE?.NAME?.()}</h3>
           <HighlightText>{name}</HighlightText>
@@ -27,7 +60,20 @@ export const ServiceCard = searchable(
             </span>
           </div>
         </p>
-      </div>
+        <button
+          type="submit"
+          className={`${mutation.isIdle ? "bg-primary-400" : "bg-primary-300"} w-full rounded py-2 items-end hover:bg-primary-300`}
+        >
+          {mutation.isIdle && <span>Eliminar</span>}
+          {mutation.isPending && (
+            <>
+              <span>Eliminando ...</span>
+              <span className="animate-spin size-[25px] border-4 border-t-silver-500 rounded-full" />
+            </>
+          )}
+          {mutation.isError && <span>Error</span>}
+        </button>
+      </form>
     );
   },
 );
