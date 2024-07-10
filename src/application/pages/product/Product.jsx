@@ -53,6 +53,8 @@ export function Products() {
             price={product.price}
             currency={product.currency}
             stock={product.stock}
+            // eslint-disable-next-line no-underscore-dangle
+            id={product._id}
           />
         ))}
       </div>
