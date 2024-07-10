@@ -5,6 +5,7 @@ import {
   faClose,
   faFileInvoice,
   faHome,
+  faMoneyBillTransfer,
   faMoneyBillWave,
   faRetweet,
   faStar,
@@ -59,6 +60,11 @@ export function Navbar() {
       name: LL?.NAVBAR?.SERVICES_ADMIN(),
       icon: faFileInvoice,
       link: `/${locale}/admin/services`,
+    },
+    {
+      name: LL?.NAVBAR?.TRANSFERENCE(),
+      icon: faMoneyBillTransfer,
+      link: `/${locale}/transference`,
     },
   ];
 

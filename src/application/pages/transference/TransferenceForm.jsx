@@ -118,7 +118,7 @@ export function TransferenceForm() {
 
   return (
     <div className="flex flex-col gap-10 py-5 px-5 h-full overflow-y-scroll">
-      <h1 className="text-5xl w-full text-center">Service Form</h1>
+      <h1 className="text-5xl w-full text-center">Transference Form</h1>
       <div className="flex justify-center">
         <form
           className="grid grid-cols-6 gap-4 w-full lg:w-[600px] items-start"

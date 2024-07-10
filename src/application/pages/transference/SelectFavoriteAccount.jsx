@@ -120,6 +120,12 @@ export function FavoriteAccountsSelect({
             type="button"
             onClick={() => {
               // TODO CREATE FAVORITE ACCOUNT
+              if (!mutation.isIdle) return;
+              mutation.mutate({
+                locale,
+                favoriteAccount: form,
+                owner: ownerAccountId,
+              });
             }}
             className="bg-primary-400 outline-none focus:outline-offset-2 focus:outline-primary-400 px-4 py-2 text-center rounded text-white hover:bg-primary-300 flex gap-2 justify-center"
           >
