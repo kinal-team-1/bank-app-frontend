@@ -51,6 +51,11 @@ export function Navbar() {
       link: `/${locale}/user`,
     },
     {
+      name: LL?.NAVBAR?.USER_ADMIN(),
+      icon: faBox,
+      link: `/${locale}/admin`,
+    },
+    {
       name: LL?.NAVBAR?.FAVORITE_ACCOUNTS(),
       icon: faStar,
       link: `/${locale}/favorite-accounts`,

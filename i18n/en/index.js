@@ -19,6 +19,7 @@ const en = {
     USER: "users",
     FAVORITE_ACCOUNTS: "Favorite Accounts",
     PRODUCT_ADMIN: "Admin Prodcuts",
+    USER_ADMIN: "User Admin",
   },
   ERROR: {
     SOMETHING_WENT_WRONG: "Something went wrong",

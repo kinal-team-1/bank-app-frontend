@@ -2,10 +2,10 @@ import axios from "axios";
 import { API_URL } from "../../../config";
 import { ClientError, FetchError, ServerError } from "../GET/get-services";
 
-export function deleteAdminUser({ userId, locale }) {
-  console.log({ userId });
+export function deleteAdminUser({ adminUserId, locale }) {
+  console.log({ adminUserId });
   return axios
-    .delete(`${API_URL}/admin/${userId}`, {
+    .delete(`${API_URL}/admin/${adminUserId}`, {
       headers: {
         "Accept-Language": locale,
       },

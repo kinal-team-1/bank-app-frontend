@@ -19,6 +19,7 @@ const es = {
     USER: "Usuarios",
     FAVORITE_ACCOUNTS: "Cuentas Favoritas",
     PRODUCT_ADMIN: "Productos Admin",
+    USER_ADMIN: "Usuario Admin",
   },
   ERROR: {
     SOMETHING_WENT_WRONG: "Algo salió mal",

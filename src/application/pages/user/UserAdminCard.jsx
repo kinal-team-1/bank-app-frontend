@@ -11,7 +11,7 @@ export const UserAdminCard = searchable(
     const { locale } = useParams();
     const { LL } = useLocaleService();
     const mutation = useMutationWithToast(deleteAdminUser, {
-      invalidateQueries: ["users"],
+      invalidateQueries: ["admins"],
     });
 
     useEffect(() => {
