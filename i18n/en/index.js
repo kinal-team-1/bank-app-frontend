@@ -17,7 +17,8 @@ const en = {
     CURRENCIES: "Currencies",
     LOG_OUT: "Log out",
     FAVORITE_ACCOUNTS: "Favorite Accounts",
-    PRODUCT_ADMIN: "Admin Prodcuts",
+    PRODUCT_ADMIN: "Admin Produts",
+    SERVICES_ADMIN: "Admin services",
   },
   ERROR: {
     SOMETHING_WENT_WRONG: "Something went wrong",
@@ -36,6 +37,12 @@ const en = {
       ACCOUNT: "Account",
       OWNER: "Owner",
       ALIAS: "alias",
+    },
+    PRODUCT: {
+      NAME: "Name",
+      DESCRIPTION: "Description",
+      PRICE: "Price",
+      STOCK: "Stock",
     },
   },
   FORMS: {

@@ -55,6 +55,11 @@ export function Navbar() {
       icon: faBox,
       link: `/${locale}/admin/product`,
     },
+    {
+      name: LL?.NAVBAR?.SERVICES_ADMIN(),
+      icon: faFileInvoice,
+      link: `/${locale}/admin/services`,
+    },
   ];
 
   return (

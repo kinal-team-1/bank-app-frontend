@@ -18,6 +18,7 @@ const es = {
     LOG_OUT: "Cerrar sesión",
     FAVORITE_ACCOUNTS: "Cuentas Favoritas",
     PRODUCT_ADMIN: "Productos Admin",
+    SERVICES_ADMIN: "Servicios Admin",
   },
   ERROR: {
     SOMETHING_WENT_WRONG: "Algo salió mal",
@@ -36,6 +37,12 @@ const es = {
       ACCOUNT: "Cuenta",
       OWNER: "Propietario",
       ALIAS: "Alias",
+    },
+    PRODUCT: {
+      NAME: "Nombre",
+      DESCRIPTION: "Descripción",
+      PRICE: "Precio",
+      STOCK: "Existencias",
     },
   },
   FORMS: {
