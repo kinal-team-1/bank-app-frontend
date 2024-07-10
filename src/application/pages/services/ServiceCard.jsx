@@ -21,7 +21,7 @@ export const ServiceCard = searchable(
         <p className="text-gray-500">
           <h3 className="text-primary-400">{LL?.PAGES?.SERVICE?.PRICE?.()}</h3>
           <div className="flex gap-2">
-            <span>{currency}</span>
+            <span>{currency.key}</span>
             <span>
               <HighlightText>{price}</HighlightText>
             </span>

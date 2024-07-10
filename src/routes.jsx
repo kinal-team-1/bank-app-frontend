@@ -5,6 +5,8 @@ import { LocaleProvider } from "./services/locale";
 import { DarkModeProvider } from "./services/dark-mode";
 import { SearchProvider } from "./services/search-bar";
 import { Services } from "./application/pages/services/Services";
+import { ServicesAdmin } from "./application/pages/servicesAdmin/ServicesAdmin";
+import { ServiceForm } from "./application/pages/servicesAdmin/ServiceForm";
 import { FavoriteAccounts } from "./application/pages/favoriteAccounts/FavoriteAccounts";
 import { Products } from "./application/pages/product/Product";
 import { NavbarMobileProvider } from "./services/navbar-mobile-service";
@@ -13,16 +15,15 @@ import { Layout } from "./Layout";
 import { Home } from "./application/pages/home/Home";
 import { Movements } from "./application/pages/movements/Movements";
 import { SUPPORTED_LANGUAGES } from "./config";
-import { ServiceForm } from "./application/pages/services/ServiceForm";
 import { Login } from "./application/pages/log-in/Login";
 import { UserValidation } from "./UserValidaion";
 import { validateToken } from "./application/actions/GET/validate-token";
-import { FavoriteAccountForm } from "./application/pages/favoriteAccounts/FavoriteAccountForm";
+// import { FavoriteAccountForm } from "./application/pages/favoriteAccounts/FavoriteAccountForm";
 import { PrivateUserRoute } from "./application/PrivateUserRoute";
 import { AuthProvider } from "./services/auth";
 import { ProductsAdmin } from "./application/pages/productAdmin/ProductAdmin";
 import { ProductForm } from "./application/pages/productAdmin/ProductForm";
-import { TransferenceForm } from "./application/pages/transference/TransferenceForm.jsx";
+import { TransferenceForm } from "./application/pages/transference/TransferenceForm";
 
 const queryClient = new QueryClient();
 
@@ -93,20 +94,6 @@ const router = createBrowserRouter([
                     element: <Home />,
                   },
                   {
-                    path: "services",
-                    element: <Outlet />,
-                    children: [
-                      {
-                        path: "",
-                        element: <Services />,
-                      },
-                      {
-                        path: "create",
-                        element: <ServiceForm />,
-                      },
-                    ],
-                  },
-                  {
                     path: "movements",
                     element: <Movements />,
                   },
@@ -122,10 +109,10 @@ const router = createBrowserRouter([
                         path: "",
                         element: <FavoriteAccounts />,
                       },
-                      {
-                        path: "create",
-                        element: <FavoriteAccountForm />,
-                      },
+                      // {
+                      //   path: "create",
+                      //   element: <FavoriteAccountForm />,
+                      // },
                     ],
                   },
                   {
@@ -143,9 +130,25 @@ const router = createBrowserRouter([
                       },
                     ],
                   },
+
                   {
                     path: "transference",
                     element: <TransferenceForm />,
+                  },
+                  {
+                    path: "services",
+                    element: <Services />,
+                  },
+                  {
+                    path: "admin/services",
+                    element: <Outlet />,
+                    children: [
+                      { path: "", element: <ServicesAdmin /> },
+                      {
+                        path: "create",
+                        element: <ServiceForm />,
+                      },
+                    ],
                   },
                   // MUST BE LAST ALWAYS
                   { path: "*", element: <NotFound /> },
