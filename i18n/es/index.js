@@ -20,6 +20,8 @@ const es = {
     FAVORITE_ACCOUNTS: "Cuentas Favoritas",
     PRODUCT_ADMIN: "Productos Admin",
     USER_ADMIN: "Usuario Admin",
+    SERVICES_ADMIN: "Servicios Admin",
+    TRANSFERENCE: "Transferencia",
   },
   ERROR: {
     SOMETHING_WENT_WRONG: "Algo salió mal",
@@ -51,6 +53,16 @@ const es = {
       ACCOUNT: "Cuenta",
       OWNER: "Propietario",
       ALIAS: "Alias",
+    },
+    PRODUCT: {
+      NAME: "Nombre",
+      DESCRIPTION: "Descripción",
+      PRICE: "Precio",
+      STOCK: "Existencias",
+    },
+    ACCOUNT: {
+      NAME: "Nombre",
+      BALANCE: "Balance",
     },
   },
   FORMS: {

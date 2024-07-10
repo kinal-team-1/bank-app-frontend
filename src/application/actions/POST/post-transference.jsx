@@ -1,19 +1,15 @@
 import axios from "axios";
 import { API_URL } from "../../../config";
-import { ClientError, FetchError, ServerError } from "../GET/get-services";
+import { ClientError, FetchError } from "../GET/get-services";
+import { ServerError } from "../GET/get-product";
 
-export function postFavoriteAccount({ favoriteAccount, locale, owner }) {
+export function postTransference({ transference, locale }) {
   return axios
-    .post(
-      `${API_URL}/favorite-accounts`,
-      // eslint-disable-next-line no-underscore-dangle
-      { ...favoriteAccount, owner },
-      {
-        headers: {
-          "Accept-Language": locale,
-        },
+    .post(`${API_URL}/transference`, transference, {
+      headers: {
+        "Accept-Language": locale,
       },
-    )
+    })
     .then((res) => [res.data.data, res.data.message, res.status])
     .catch((error) => {
       if (error.code === "ERR_NETWORK") {

@@ -20,6 +20,8 @@ const en = {
     FAVORITE_ACCOUNTS: "Favorite Accounts",
     PRODUCT_ADMIN: "Admin Prodcuts",
     USER_ADMIN: "User Admin",
+    SERVICES_ADMIN: "Admin services",
+    TRANSFERENCE: "Transference",
   },
   ERROR: {
     SOMETHING_WENT_WRONG: "Something went wrong",
@@ -51,6 +53,16 @@ const en = {
       ACCOUNT: "Account",
       OWNER: "Owner",
       ALIAS: "alias",
+    },
+    PRODUCT: {
+      NAME: "Name",
+      DESCRIPTION: "Description",
+      PRICE: "Price",
+      STOCK: "Stock",
+    },
+    ACCOUNT: {
+      NAME: "Name",
+      BALANCE: "Balance",
     },
   },
   FORMS: {

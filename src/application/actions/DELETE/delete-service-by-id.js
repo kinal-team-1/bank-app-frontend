@@ -2,19 +2,17 @@ import axios from "axios";
 import { API_URL } from "../../../config";
 import { ClientError, FetchError, ServerError } from "../GET/get-services";
 
-export function postFavoriteAccount({ favoriteAccount, locale, owner }) {
+export function deleteByServiceId({ serviceId, locale }) {
+  console.log({ serviceId });
   return axios
-    .post(
-      `${API_URL}/favorite-accounts`,
-      // eslint-disable-next-line no-underscore-dangle
-      { ...favoriteAccount, owner },
-      {
-        headers: {
-          "Accept-Language": locale,
-        },
+    .delete(`${API_URL}/service/${serviceId}`, {
+      headers: {
+        "Accept-Language": locale,
       },
-    )
-    .then((res) => [res.data.data, res.data.message, res.status])
+    })
+    .then((res) => {
+      return [res.data.data, res.data.message, res.status];
+    })
     .catch((error) => {
       if (error.code === "ERR_NETWORK") {
         throw new FetchError(error.message);

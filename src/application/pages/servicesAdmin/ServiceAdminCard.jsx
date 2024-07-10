@@ -3,14 +3,14 @@ import { useEffect } from "react";
 import { searchable } from "../../components/Searchable";
 import { useLocaleService } from "../../../services/locale";
 import { useMutationWithToast } from "../../hooks/use-mutation-with-toast";
-import { deleteByProductId } from "../../actions/DELETE/delete-product-by-id";
+import { deleteByServiceId } from "../../actions/DELETE/delete-service-by-id";
 
-export const ProductAdminCard = searchable(
-  ({ HighlightText, name, description, price, currency, stock, id }) => {
+export const ServicesAdminCard = searchable(
+  ({ HighlightText, name, description, price, currency, id }) => {
     const { locale } = useParams();
     const { LL } = useLocaleService();
-    const mutation = useMutationWithToast(deleteByProductId, {
-      invalidateQueries: ["products"],
+    const mutation = useMutationWithToast(deleteByServiceId, {
+      invalidateQueries: ["services"],
     });
 
     useEffect(() => {
@@ -21,47 +21,40 @@ export const ProductAdminCard = searchable(
       }, 3000);
     }, [mutation.isError]);
 
+    console.log(currency);
     return (
       <form
         onSubmit={(e) => {
           e.preventDefault();
           if (!mutation.isIdle) return;
 
-          mutation.mutate({ productId: id, locale });
+          mutation.mutate({ serviceId: id, locale });
         }}
         className="flex flex-col justify-between border border-gray-200 rounded-md p-4 shadow-sm"
       >
         <div className="">
           <h2 className="text-lg font-semibold">
-            <h3 className="text-primary-400">{LL?.PAGES?.PRODUCT?.NAME?.()}</h3>
+            <h3 className="text-primary-400">{LL?.PAGES?.SERVICE?.NAME?.()}</h3>
             <HighlightText>{name}</HighlightText>
           </h2>
           <p className="text-gray-500">
             <h3 className="text-primary-400">
-              {LL?.PAGES?.PRODUCT?.DESCRIPTION?.()}
+              {LL?.PAGES?.SERVICE?.DESCRIPTION?.()}
             </h3>
             <HighlightText>{description}</HighlightText>
           </p>
           <div className="text-gray-500">
             <h3 className="text-primary-400">
-              {LL?.PAGES?.PRODUCT?.PRICE?.()}
+              {LL?.PAGES?.SERVICE?.PRICE?.()}
             </h3>
             <div className="flex gap-2">
               <span className="text-lg font-semibold text-gray-900">
-                {currency}
+                {currency?.key}
               </span>
               <span className="text-xl font-bold text-gray-900">
                 <HighlightText>{price}</HighlightText>
               </span>
             </div>
-          </div>
-          <div className="text-gray-500">
-            <h3 className="text-primary-400">
-              {LL?.PAGES?.PRODUCT?.STOCK?.()}
-            </h3>
-            <span className="text-lg font-semibold text-gray-900">
-              <HighlightText>{stock}</HighlightText>
-            </span>
           </div>
         </div>
         <button

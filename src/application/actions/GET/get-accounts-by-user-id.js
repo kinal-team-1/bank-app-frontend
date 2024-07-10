@@ -1,19 +1,16 @@
 import axios from "axios";
 import { API_URL } from "../../../config";
-import { ClientError, FetchError, ServerError } from "../GET/get-services";
+import { ClientError, FetchError, ServerError } from "./get-services";
 
-export function postFavoriteAccount({ favoriteAccount, locale, owner }) {
+export function getAccountsByUserId({ queryKey }) {
+  const [, { userId, locale }] = queryKey;
+
   return axios
-    .post(
-      `${API_URL}/favorite-accounts`,
-      // eslint-disable-next-line no-underscore-dangle
-      { ...favoriteAccount, owner },
-      {
-        headers: {
-          "Accept-Language": locale,
-        },
+    .get(`${API_URL}/account/user/${userId}`, {
+      headers: {
+        "Accept-Language": locale,
       },
-    )
+    })
     .then((res) => [res.data.data, res.data.message, res.status])
     .catch((error) => {
       if (error.code === "ERR_NETWORK") {

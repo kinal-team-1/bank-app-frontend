@@ -1,33 +1,31 @@
-import { Link, useParams, useSearchParams } from "react-router-dom";
 import { useState } from "react";
-import { getFavoriteAccounts } from "../../actions/GET/get-favorite-accounts";
+import { Link, useParams, useSearchParams } from "react-router-dom"; // Importa Link
 import { ErrorContainer } from "../../components/ErrorContainer";
 import { useFetchWithToast } from "../../hooks/use-fetch-with-toast";
-import { FavoriteAccountCard } from "./FavoriteAccountCard";
-import { useAuthService } from "../../../services/auth";
+import { ServicesAdminCard } from "./ServiceAdminCard";
+import { getServices } from "../../actions/GET/get-services";
 
-export function FavoriteAccounts() {
+export function ServicesAdmin() {
   const [hiddenElements, setHiddenElements] = useState(new Set());
-  const { user } = useAuthService();
   const { locale } = useParams();
   const [params] = useSearchParams();
+
   const {
-    data: [favoriteAccounts] = [],
+    data: [services] = [],
     isLoading,
     error,
   } = useFetchWithToast({
-    // eslint-disable-next-line no-underscore-dangle
-    queryKey: ["favorite-accounts", { locale, params, userId: user._id }],
-    queryFn: getFavoriteAccounts,
+    queryKey: ["services", { locale, params }],
+    queryFn: getServices,
   });
 
   if (isLoading) return <div>Loading...</div>;
 
   if (error) return <ErrorContainer />;
 
-  if (!favoriteAccounts) return null;
+  if (!services) return null;
 
-  console.log({ favoriteAccounts }, { hiddenElements });
+  console.log({ services }, { hiddenElements });
 
   return (
     <div className="h-full flex flex-col gap-2">
@@ -39,31 +37,33 @@ export function FavoriteAccounts() {
           Crear
         </Link>
       </div>
-      <div className="grow content-start overflow-y-scroll border gap-5 md:px-4 grid grid-cols-[repeat(auto-fill,minmax(330px,1fr))]">
-        {favoriteAccounts.map((account) => (
-          <FavoriteAccountCard
+      <div className="grow content-start overflow-y-scroll gap-5 md:px-4 grid grid-cols-[repeat(auto-fill,minmax(330px,1fr))]">
+        {services.map((service) => (
+          <ServicesAdminCard
             onShow={() => {
               setHiddenElements((prev) => {
-                // eslint-disable-next-line no-underscore-dangle
-                prev.delete(account._id);
+                prev.delete(service.id);
                 return new Set(prev);
               });
             }}
             onHide={() =>
               setHiddenElements((prev) => {
-                // eslint-disable-next-line no-underscore-dangle
-                prev.add(account._id);
+                prev.add(service.id);
                 return new Set(prev);
               })
             }
             // eslint-disable-next-line no-underscore-dangle
-            key={account._id}
-            account={account.account}
-            alias={account.alias}
+            key={service._id}
+            name={service.name}
+            description={service.description}
+            price={service.price}
+            currency={service.currency}
+            // eslint-disable-next-line no-underscore-dangle
+            id={service._id}
           />
         ))}
       </div>
-      {hiddenElements.size === favoriteAccounts.length && (
+      {hiddenElements.size === services.length && (
         <div className="flex text-3xl justify-center items-center h-full">
           <span>No elements found</span>
         </div>

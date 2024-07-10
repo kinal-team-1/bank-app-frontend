@@ -40,6 +40,8 @@ export class FetchError extends Error {
 export function getFavoriteAccounts({ queryKey, signal }) {
   const [_, { locale, params, userId }] = queryKey;
 
+  console.log({ userId });
+
   return axios
     .get(`${API_URL}/favorite-accounts/${userId}?${params}`, {
       signal,
