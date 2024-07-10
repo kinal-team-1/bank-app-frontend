@@ -21,7 +21,7 @@ const es = {
     PRODUCT_ADMIN: "Productos Admin",
     USER_ADMIN: "Usuario Admin",
     SERVICES_ADMIN: "Servicios Admin",
-    TRANSFERENCE: "Transferencia",
+    TRANSFERENCE: "Transferencias",
   },
   ERROR: {
     SOMETHING_WENT_WRONG: "Algo salió mal",

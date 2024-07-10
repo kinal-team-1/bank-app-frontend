@@ -2,11 +2,11 @@ import axios from "axios";
 import { API_URL } from "../../../config";
 import { ClientError, FetchError, ServerError } from "./get-services";
 
-export function getPayouts({ queryKey, signal }) {
-  const [, { locale, params }] = queryKey;
+export function getTransactionsByUserId({ queryKey, signal }) {
+  const [, { locale, params, userId }] = queryKey;
 
   return axios
-    .get(`${API_URL}/payouts?${params}`, {
+    .get(`${API_URL}/transaction/user/${userId}?${params}`, {
       headers: {
         "Accept-Language": locale,
       },
