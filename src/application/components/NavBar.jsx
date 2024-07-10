@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowRightToBracket,
+  faBank,
   faBox,
   faClose,
   faFileInvoice,
@@ -75,6 +76,11 @@ export function Navbar() {
       name: LL?.NAVBAR?.TRANSFERENCE(),
       icon: faMoneyBillTransfer,
       link: `/${locale}/transference`,
+    },
+    {
+      name: LL?.NAVBAR?.PURCHASES(),
+      icon: faBank,
+      link: `/${locale}/purchases`,
     },
   ];
 

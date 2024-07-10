@@ -22,6 +22,7 @@ const es = {
     USER_ADMIN: "Usuario Admin",
     SERVICES_ADMIN: "Servicios Admin",
     TRANSFERENCE: "Transferencias",
+    PURCHASES: "Compradores",
   },
   ERROR: {
     SOMETHING_WENT_WRONG: "Algo salió mal",
@@ -63,6 +64,13 @@ const es = {
     ACCOUNT: {
       NAME: "Nombre",
       BALANCE: "Balance",
+    },
+    PURCHASE: {
+      PURCHASER: "Comprador",
+      PRODUCT: "Prodcuto",
+      QUANTITY: "Cantidad",
+      TOTAL: "Total",
+      BUY_NOW: "Comprar Ahora",
     },
   },
   FORMS: {

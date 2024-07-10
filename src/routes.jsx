@@ -29,6 +29,7 @@ import { UserAdmin } from "./application/pages/user/UserAdmin";
 import { TransferenceForm } from "./application/pages/transference/TransferenceForm";
 import { Accounts } from "./application/pages/accounts/Accounts";
 import { ComprarProducto } from "./application/pages/product/ComprarProducto";
+import { Purchases } from "./application/pages/purchase/Purchase";
 
 const queryClient = new QueryClient();
 
@@ -105,6 +106,10 @@ const router = createBrowserRouter([
                   {
                     path: "currencies",
                     element: <div>Hola</div>,
+                  },
+                  {
+                    path: "purchases",
+                    element: <Purchases />,
                   },
                   {
                     path: "favorite-accounts",
