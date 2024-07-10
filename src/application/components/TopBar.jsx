@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBars,
@@ -22,7 +22,7 @@ export function TobBar() {
 
   return (
     <>
-      <div className="hidden md:grid py-5 px-3 grid-cols-3 justify-items-center items-center bg-primary-400">
+      <div className="hidden md:grid py-5 px-3 grid-cols-3 justify-items-center items-center">
         <h1 className="justify-self-start text-2xl">Overview</h1>
         <div className="justify-self-center h-full">
           <Searchbar />
@@ -80,6 +80,12 @@ function TopBarButtons() {
   const navigate = useNavigate();
   const currentPath = window.location.pathname;
 
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <div className="flex gap-2">
       <DropDown
@@ -109,12 +115,31 @@ function TopBarButtons() {
       >
         <FontAwesomeIcon icon={isDark ? faSun : faMoon} />
       </button>
-      <button
-        type="button"
-        className="rounded border px-2 py-1 size-[calc(100px/3)] cursor-pointer hover:text-primary-400"
-      >
-        <span className="text-sm">LC</span>
-      </button>
+      <div className="relative">
+        <button
+          type="button"
+          className="rounded border px-2 py-1 size-[calc(100px/3)] cursor-pointer hover:text-primary-400"
+          onClick={toggleDropdown}
+        >
+          <span className="text-sm">LC</span>
+        </button>
+        {isOpen && (
+          <div className="absolute right-0 mt-1 bg-vulcan-950 border rounded shadow-lg z-30 w-52 ">
+            <Link
+              to={`/${locale}/user`}
+              className="block w-full text-center px-4 py-2 hover:bg-primary-500 hover:text-vulcan-950 rounded"
+            >
+              <span className="inline-block">User menu</span>
+            </Link>
+            <Link
+              to={`/${locale}/home`}
+              className="block w-full text-center px-4 py-2 hover:bg-primary-500 hover:text-vulcan-950 rounded"
+            >
+              <span className="inline-block">Account</span>
+            </Link>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
