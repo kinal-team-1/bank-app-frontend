@@ -12,7 +12,6 @@ import { Products } from "./application/pages/product/Product";
 import { NavbarMobileProvider } from "./services/navbar-mobile-service";
 import { NotFound } from "./application/pages/NotFound";
 import { Layout } from "./Layout";
-import { Home } from "./application/pages/home/Home";
 import { Movements } from "./application/pages/movements/Movements";
 import { SUPPORTED_LANGUAGES } from "./config";
 import { Login } from "./application/pages/log-in/Login";
@@ -24,6 +23,7 @@ import { AuthProvider } from "./services/auth";
 import { ProductsAdmin } from "./application/pages/productAdmin/ProductAdmin";
 import { ProductForm } from "./application/pages/productAdmin/ProductForm";
 import { TransferenceForm } from "./application/pages/transference/TransferenceForm";
+import { Accounts } from "./application/pages/accounts/Accounts";
 
 const queryClient = new QueryClient();
 
@@ -91,7 +91,7 @@ const router = createBrowserRouter([
                 children: [
                   {
                     path: "",
-                    element: <Home />,
+                    element: <Accounts />,
                   },
                   {
                     path: "movements",

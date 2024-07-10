@@ -44,6 +44,10 @@ const en = {
       PRICE: "Price",
       STOCK: "Stock",
     },
+    ACCOUNT: {
+      NAME: "Name",
+      BALANCE: "Balance",
+    },
   },
   FORMS: {
     FAVORITE_ACCOUNT: {
