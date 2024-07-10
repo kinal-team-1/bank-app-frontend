@@ -25,12 +25,12 @@ export function Purchases() {
 
   if (!purchase) return null;
 
-  console.log({ purchases }, { hiddenElements });
+  console.log({ purchase }, { hiddenElements });
 
   return (
     <div className="h-full flex flex-col">
       <div className="grow content-start overflow-y-scroll gap-5 md:px-4 grid grid-cols-[repeat(auto-fill,minmax(330px,1fr))]">
-        {purchases.map((purchase) => (
+        {purchase.map((purchase) => (
           <PurchaseCard
             onShow={() => {
               setHiddenElements((prev) => {
@@ -58,7 +58,7 @@ export function Purchases() {
           />
         ))}
       </div>
-      {hiddenElements.size === purchases.length && (
+      {hiddenElements.size === purchase.length && (
         <div className="flex text-3xl justify-center items-center h-full">
           <span>No elements found</span>
         </div>
