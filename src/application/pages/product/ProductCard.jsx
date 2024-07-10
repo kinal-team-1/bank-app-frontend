@@ -1,8 +1,9 @@
+import { Link } from "react-router-dom"; // Importa Link
 import { searchable } from "../../components/Searchable";
 import { useLocaleService } from "../../../services/locale";
 
 export const ProductCard = searchable(
-  ({ HighlightText, name, description, price, currency, stock }) => {
+  ({ HighlightText, name, description, price, currency, stock, id }) => {
     const { LL } = useLocaleService();
 
     return (
@@ -39,6 +40,14 @@ export const ProductCard = searchable(
           <span className="text-lg font-semibold text-gray-900">
             <HighlightText>{stock}</HighlightText>
           </span>
+        </div>
+        <div className="mt-4 flex gap-2">
+          <Link
+            to={`./${id}`} // Aquí se define la ruta de compra
+            className="w-full px-4 py-2 bg-green-500 rounded text-white hover:bg-green-400 transition-colors duration-200 text-center"
+          >
+            Comprar
+          </Link>
         </div>
       </div>
     );

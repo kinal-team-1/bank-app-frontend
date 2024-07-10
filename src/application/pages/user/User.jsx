@@ -1,64 +1,79 @@
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import { useState } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
+import { getUsers } from "../../actions/GET/get-users";
 import { ErrorContainer } from "../../components/ErrorContainer";
 import { useFetchWithToast } from "../../hooks/use-fetch-with-toast";
-import { ProductCard } from "./ProductCard";
-import { getProducts } from "../../actions/GET/get-product";
+import { UserCard } from "./UserCard";
 
-export function Products() {
+export function User() {
   const [hiddenElements, setHiddenElements] = useState(new Set());
   const { locale } = useParams();
   const [params] = useSearchParams();
-
   const {
-    data: [products] = [],
+    data: [users] = [],
     isLoading,
     error,
   } = useFetchWithToast({
-    queryKey: ["products", { locale, params }],
-    queryFn: getProducts,
+    queryKey: ["users", { locale, params }],
+    queryFn: getUsers,
   });
 
   if (isLoading) return <div>Loading...</div>;
 
   if (error) return <ErrorContainer />;
 
-  if (!products) return null;
+  if (!users) return null;
 
-  console.log({ products }, { hiddenElements });
+  console.log({ users }, { hiddenElements });
 
   return (
     <div className="h-full flex flex-col">
+      <div className="flex justify-end">
+        <Link
+          className="bg-primary-400 rounded py-2 px-4 text-white"
+          to="./create"
+        >
+          Crear
+        </Link>
+      </div>
       <div className="grow content-start overflow-y-scroll gap-5 md:px-4 grid grid-cols-[repeat(auto-fill,minmax(330px,1fr))]">
-        {products.map((product) => (
-          <ProductCard
+        {users.map((user) => (
+          <UserCard
             onShow={() => {
               setHiddenElements((prev) => {
                 // eslint-disable-next-line no-underscore-dangle
-                prev.delete(product._id); // Asegúrate de tener una propiedad única de identificación para productos (como _id)
+                prev.delete(user._id);
                 return new Set(prev);
               });
             }}
             onHide={() =>
               setHiddenElements((prev) => {
                 // eslint-disable-next-line no-underscore-dangle
-                prev.add(product._id);
+                prev.add(user._id);
                 return new Set(prev);
               })
             }
             /* eslint-disable-next-line no-underscore-dangle */
-            key={product._id}
-            name={product.name}
-            description={product.description}
-            price={product.price}
-            currency={product.currency}
-            stock={product.stock}
+            key={user._id}
+            email={user.email}
+            username={user.username}
+            password={user.password}
+            name={user.name}
+            last_name={user.last_name}
+            address={user.address}
+            DPI={user.DPI}
+            phone_number={user.phone_number}
+            job_name={user.job_name}
+            monthly_income={user.monthly_income}
+            currency_income={user.currency_income}
+            main_account={user.main_account}
+            accounts={user.accounts}
             // eslint-disable-next-line no-underscore-dangle
-            id={product._id}
+            id={user._id}
           />
         ))}
       </div>
-      {hiddenElements.size === products.length && (
+      {hiddenElements.size === users.length && (
         <div className="flex text-3xl justify-center items-center h-full">
           <span>No elements found</span>
         </div>
