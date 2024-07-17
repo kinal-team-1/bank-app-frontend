@@ -1,7 +1,5 @@
 import { useLayoutEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
 export function DropDown({ defaultOption, options, onChange }) {
   const [optionSelected, setOptionSelected] = useState(defaultOption);
@@ -61,7 +59,7 @@ export function DropDown({ defaultOption, options, onChange }) {
   return (
     <div
       role="presentation"
-      className="text-white relative rounded"
+      className="dark:text-white relative rounded border flex flex-col justify-center size-[calc(100px/3)]"
       onKeyDown={handleKeyDown}
     >
       <button
@@ -71,22 +69,12 @@ export function DropDown({ defaultOption, options, onChange }) {
         }}
         ref={elementFocused === 0 ? buttonFocused : null}
         data-isopen={isOpen || null}
-        className="px-1 data-[isopen]:hover:dark:bg-vulcan-950 data-[isopen]:outline-none data-[isopen]:focus:dark:bg-vulcan-950 rounded flex gap-1 items-center w-full justify-between"
+        className="h-full w-full data-[isopen]:hover:dark:bg-vulcan-950 data-[isopen]:outline-none data-[isopen]:focus:dark:bg-vulcan-950 rounded flex gap-1 items-center justify-center"
       >
-        <span
-          style={{
-            minWidth: isOpen
-              ? `${Math.max(...options.map(({ length }) => length))}ch`
-              : "auto",
-          }}
-          className="text-start"
-        >
-          {optionSelected}
-        </span>
-        <FontAwesomeIcon className="text-xs" icon={faChevronDown} />
+        <span className="text-start">{optionSelected}</span>
       </button>
       {isOpen && (
-        <div className="top-[95%] absolute flex flex-col w-full bg-white dark:bg-vulcan-900 z-10 rounded overflow-none">
+        <div className="top-[105%] bg-silver-300 absolute flex flex-col w-full bg-white dark:bg-vulcan-900 z-10 rounded overflow-none">
           {options
             .filter((option) => option !== optionSelected)
             .map((option, i, arr) =>
@@ -97,11 +85,11 @@ export function DropDown({ defaultOption, options, onChange }) {
                   onClick={() => {
                     setOptionSelected(option);
                     setIsOpen(false);
-                    onChange(option);
+                    onChange(option, options);
                   }}
                   data-islast={i === arr.length - 1 || null}
                   type="button"
-                  className="px-1 hover:dark:bg-vulcan-950 focus:dark:bg-vulcan-950 outline-none text-start data-[islast]:rounded-b"
+                  className="w-full size-[calc(100px/3)] hover:dark:bg-vulcan-950 focus:dark:bg-vulcan-950 outline-none text-start data-[islast]:rounded-b flex justify-center items-center"
                 >
                   {option}
                 </button>

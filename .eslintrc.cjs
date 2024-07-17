@@ -39,5 +39,6 @@ module.exports = {
     ],
     // 2 space identation
     indent: ["error", 2],
+    'jsx-a11y/label-has-associated-control': "off",
   },
 };

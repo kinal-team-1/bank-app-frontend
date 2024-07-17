@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+import { default as defaultColors } from "tailwindcss/colors";
+
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   darkMode: "selector",
@@ -46,6 +48,10 @@ export default {
         400: "#c1c0c0",
         500: "#aba9a9",
       },
+      red: defaultColors.red,
+      green: defaultColors.green,
+      white: defaultColors.white,
+      gray: defaultColors.gray,
     },
     extend: {},
   },

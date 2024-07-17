@@ -1,7 +1,7 @@
-import { useLocale } from "../../services/locale";
+import { useLocaleService } from "../../../services/locale";
 
 export function Home() {
-  const { LL } = useLocale();
+  const { LL } = useLocaleService();
 
   return (
     <div className="flex justify-center items-center h-full">

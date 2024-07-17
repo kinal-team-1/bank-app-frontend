@@ -55,6 +55,7 @@ LocaleProvider.propTypes = {
  * Hook to access the locale context.
  * @returns {{LL?: TranslationFunctions, locale: string, setLocale: any}}
  */
-export const useLocale = () => {
+export const useLocaleService = () => {
   return useContext(LocaleContext);
 };
+
